@@ -1,4 +1,14 @@
 html.dark{
     --text-color: #fff;
     --content-bg: #000;
+    --header-bg: #121212;
+    --search-bg: #ffffff1f;
+    --search-line-bg: #ffffff1f;
+    --search-btn-hover-bg: #ffffff1f;
+    --search-icon-bg: rgba(255, 255, 255, 0.34);
+    --search-icon-hover-bg: rgba(255, 255, 255, 0.9);
+    --search-placeholder-color: #ffffffe6;
+    --search-border-color: #ffffff33;
+    --search-input-color: rgba(255, 255, 255, 0.9);
+    --clear-loading-color: rgba(255, 255, 255, .34);
 }

@@ -13,10 +13,25 @@
 :root{
     --font-family: 'TikTokFont', 'sans-serif';
     --default-header-height: 60px;
+    --primary-color: #fe2c55;
 }
 
 html{
     font-size: 62.5%;
+}
+
+input,
+select,
+textarea,
+button{
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+input,
+button{
+    outline: none;
+    border: none;
 }
 
 body{
