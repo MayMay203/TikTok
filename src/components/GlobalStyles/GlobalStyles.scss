@@ -1,4 +1,6 @@
 @import 'normalize.css';
+@import '../../theme/dark.scss';
+@import '../../theme/light.scss';
 
 *,
 ::after,
@@ -9,7 +11,8 @@
 }
 
 :root{
-    --font-family: 'TikTokFont', 'sans-serif'
+    --font-family: 'TikTokFont', 'sans-serif';
+    --default-header-height: 60px;
 }
 
 html{
@@ -21,6 +24,8 @@ body{
     font-family: var(--font-family);
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+    color: var(--text-color);
+    background-color: var(--content-bg);
 }
 
 @font-face {
