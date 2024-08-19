@@ -4,6 +4,10 @@ import App from '~/App';
 import reportWebVitals from '~/reportWebVitals';
 import GlobalStyles from '~/components/GlobalStyles'
 
+const isDark = localStorage.getItem('dark') === 'true'
+document.querySelector('html').classList.toggle('dark', isDark)
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

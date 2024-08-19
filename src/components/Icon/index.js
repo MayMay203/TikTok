@@ -1,1 +1,1 @@
-export { SearchIcon} from './Icon'
+export { SearchIcon, Logo} from './Icon'
