@@ -1,7 +1,7 @@
 .wrapper{
     width: 100%;
     height: var(--default-header-height);
-    padding-left: 20px;
+    padding-left: 15px;
     padding-right: 24px;
     border: 1px solid #ccc;
     background-color: var(--header-bg);
@@ -12,9 +12,27 @@
     height: 100%;
     display: flex;
     align-items: center;
-    // justify-content: space-between;
+    justify-content: space-between;
+}
+
+.actions{
+    display: flex;
+    align-items: center;
+}
+
+.more-btn{
+    color: var(--text-color);
+    margin-left: 16px;
+    width: 28px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.logo-wrapper{
+    height: 42px;
 }
 
 .logo{
-    min-width: 300px;
+    height: 100%;
 }

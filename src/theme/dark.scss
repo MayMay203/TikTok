@@ -1,5 +1,5 @@
 html.dark{
-    --text-color: #fff;
+    --text-color: rgba(255,255, 255, 0.9);
     --content-bg: #000;
     --header-bg: #121212;
     --search-bg: #ffffff1f;
@@ -11,4 +11,18 @@ html.dark{
     --search-border-color: #ffffff33;
     --search-input-color: rgba(255, 255, 255, 0.9);
     --clear-loading-color: rgba(255, 255, 255, .34);
+
+    --popper-wrapper-bg: #252525;
+    --account-item-hover-bg: #ffffff0a;
+    --account-text-color: #ffffff80;
+    --menu-wrapper-more-bg: #252525;
+
+    --btn-text-bg: #ffffff14;
+    --btn-text-hover-bg: #ffffff0a;
+    --btn-outline-bg: #ffffff14;
+    --btn-rounded-bg: #ffffffbf;
+    --btn-outline-hover-bg: #fe2c550f;
+    --btn-rounded-hover-bg: #2e2e2e;
+    --btn-rounded-text-color: #ffffffbf;
+    --btn-rounded-border-color: rgba(255, 255, 255, 0);
 }
