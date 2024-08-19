@@ -1,0 +1,23 @@
+// Menu wrapper
+.menu-items{
+    width: 224px;
+
+    // Menu Item
+    .menu-item{
+        color: var(--text-color);
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 11px 16px;
+        white-space: nowrap;
+
+        &:hover{
+            background: var(--account-item-hover-bg);
+        }
+    }
+}
+
+.menu-popper{
+    padding-bottom: 8px;
+}
+

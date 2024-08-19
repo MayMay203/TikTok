@@ -2,8 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './AccountItem.module.scss'
 import classNames from 'classnames/bind'
 import { faCheckCircle, faEllipsis } from '@fortawesome/free-solid-svg-icons'
-import Tippy from '@tippyjs/react/headless'
-import MenuItem from '../MenuItem'
 
 const cx = classNames.bind(styles)
 function AccountItem() {
@@ -23,24 +21,11 @@ function AccountItem() {
           <span className={cx('username')}>lethihongnhung</span>
         </div>
       </div>
-      <Tippy
-        interactive
-              placement="bottom"
-              offset={[-60]}
-        render={(attrs) => (
-          <div className={cx('menu-wrapper')} tabIndex="-1" {...attrs}>
-            <MenuItem active />
-            <span className={cx('separate')}></span>
-            <MenuItem active />
-          </div>
-        )}
-      >
         <div classNames={cx('more')}>
           <button className={cx('more-btn')}>
             <FontAwesomeIcon icon={faEllipsis} />
           </button>
         </div>
-      </Tippy>
     </div>
   )
 }

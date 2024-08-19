@@ -11,6 +11,7 @@
     overflow: hidden;
     border: 1px solid transparent;
     position: relative;
+    margin-left: 175px;
 
     &:focus-within{
         border-color: var(--search-border-color);
