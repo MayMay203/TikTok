@@ -1,0 +1,13 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+
+    &.active{
+        &:hover{
+            color: var(--primary-color);
+        }
+    }
+}

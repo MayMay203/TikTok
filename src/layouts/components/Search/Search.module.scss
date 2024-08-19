@@ -67,6 +67,15 @@
     &-icon{
         color: var(--search-icon-bg);
     }
+
+    &-result{
+        width: 500px;
+    }
+
+    &-title{
+        padding: 5px 12px;
+        color: var(--account-text-color);
+    }
 }
 
 .clear{
