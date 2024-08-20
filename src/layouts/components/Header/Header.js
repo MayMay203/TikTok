@@ -24,13 +24,13 @@ function Header() {
   // MENU ITEMS
   const MENU_ITEMS = [
     {
-      icon: <CreatorIcon/>,
+      icon: <CreatorIcon />,
       title: 'Creator tools',
       children: {
         title: 'Creator tools',
         data: [
           {
-            icon: <HubIcon/>,
+            icon: <HubIcon />,
             title: 'LIVE Creator Hub',
             to: 'https://www.tiktok.com/live/creators/vi-VN/?enter_from=more&lang=en&region=VN',
           },
@@ -38,7 +38,7 @@ function Header() {
       },
     },
     {
-      icon: <LanguageIcon/>,
+      icon: <LanguageIcon />,
       title: 'English',
       children: {
         title: 'Language',
@@ -53,16 +53,66 @@ function Header() {
             code: 'vi',
             title: 'Tiếng Việt',
           },
+          {
+            type: 'language',
+            code: 'en',
+            title: 'English',
+          },
+          {
+            type: 'language',
+            code: 'vi',
+            title: 'Tiếng Việt',
+          },
+          {
+            type: 'language',
+            code: 'en',
+            title: 'English',
+          },
+          {
+            type: 'language',
+            code: 'vi',
+            title: 'Tiếng Việt',
+          },
+          {
+            type: 'language',
+            code: 'en',
+            title: 'English',
+          },
+          {
+            type: 'language',
+            code: 'vi',
+            title: 'Tiếng Việt',
+          },
+          {
+            type: 'language',
+            code: 'en',
+            title: 'English',
+          },
+          {
+            type: 'language',
+            code: 'vi',
+            title: 'Tiếng Việt',
+          },
+          {
+            type: 'language',
+            code: 'en',
+            title: 'English',
+          },
+          {
+            type: 'language',
+            code: 'vi',
+            title: 'Tiếng Việt',
+          },
         ],
       },
     },
     {
-      icon: <FeedbackIcon/>,
+      icon: <FeedbackIcon />,
       title: 'Feedback and help',
       to: '/feedback',
     },
     {
-      icon: <DarkIcon/>,
+      icon: <DarkIcon />,
       title: 'Dark Mode',
       children: {
         title: 'Dark Mode',

@@ -6,4 +6,6 @@
     background-color: var(--popper-wrapper-bg);
     border-radius: 8px;
     padding-top: 8px;
+    display: flex;
+    flex-direction: column;
 }
