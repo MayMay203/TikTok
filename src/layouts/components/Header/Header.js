@@ -3,41 +3,33 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCheck,
-  faCoins,
-  faCommentDots,
   faEllipsisVertical,
-  faHouseFlag,
-  faHouseSignal,
-  faLanguage,
-  faMoon,
-  faPlus,
-  faRightFromBracket,
-  faScrewdriverWrench,
-  faUser,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
-import { faMessage, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css' // optional
 
 import styles from './Header.module.scss'
-import images from '~/assets/images'
 import Search from '~/layouts/components/Search'
 import Button from '~/components/Button'
 import Menu from '~/components/Popper/Menu'
-import { Logo } from '~/components/Icon'
+import { CreatorIcon, InboxIcon, LanguageIcon, Logo } from '~/components/Icon'
+import { UploadIcon } from '~/components/Icon'
+import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, SettingIcon, StudioIcon, UserIcon } from '~/components/Icon/Icon'
+import Image from '~/components/Image'
 
 const cx = classNames.bind(styles);
 function Header() {
   // MENU ITEMS
   const MENU_ITEMS = [
     {
-      icon: <FontAwesomeIcon icon={faHouseFlag} />,
+      icon: <CreatorIcon/>,
       title: 'Creator tools',
       children: {
         title: 'Creator tools',
         data: [
           {
-            icon: <FontAwesomeIcon icon={faHouseSignal} />,
+            icon: <HubIcon/>,
             title: 'LIVE Creator Hub',
             to: 'https://www.tiktok.com/live/creators/vi-VN/?enter_from=more&lang=en&region=VN',
           },
@@ -45,7 +37,7 @@ function Header() {
       },
     },
     {
-      icon: <FontAwesomeIcon icon={faLanguage} />,
+      icon: <LanguageIcon/>,
       title: 'English',
       children: {
         title: 'Language',
@@ -64,12 +56,12 @@ function Header() {
       },
     },
     {
-      icon: <FontAwesomeIcon icon={faCommentDots} />,
+      icon: <FeedbackIcon/>,
       title: 'Feedback and help',
       to: '/feedback',
     },
     {
-      icon: <FontAwesomeIcon icon={faMoon} />,
+      icon: <DarkIcon/>,
       title: 'Dark Mode',
       children: {
         title: 'Dark Mode',
@@ -97,28 +89,48 @@ function Header() {
   // USER MENU
   const USER_MENU = [
     {
-      icon: <FontAwesomeIcon icon={faUser} />,
+      icon: <UserIcon />,
       title: 'View Profile',
       to: '/profile',
     },
     {
-      icon: <FontAwesomeIcon icon={faCoins} />,
+      icon: <CoinIcon />,
       title: 'Get Coins',
       href: 'https://www.tiktok.com/coin?enter_from=web_main_nav',
     },
-    MENU_ITEMS[0],
     {
-      icon: <FontAwesomeIcon icon={faScrewdriverWrench} />,
+      icon: <CreatorIcon />,
+      title: 'Creator Tools',
+      children: {
+        title: 'Creator Tools',
+        data: [
+          {
+            icon: <ChartIcon />,
+            title: 'View Analytics',
+          },
+          {
+            icon: <StudioIcon />,
+            title: 'LIVE Studio'
+          },
+          {
+            icon: <HubIcon />,
+            title: 'LIVE Creator Hub'
+          }
+        ]
+      }
+    },
+    {
+      icon: <SettingIcon />,
       title: 'Settings',
-      to: '/setting'
+      to: '/setting',
     },
     ...MENU_ITEMS.slice(1),
     {
-      icon: <FontAwesomeIcon icon={faRightFromBracket} />,
+      icon: <LogoutIcon />,
       title: 'Logout',
       to: '/login',
-      separate: true
-    }
+      separate: true,
+    },
   ]
 
   // Handle select menu
@@ -164,22 +176,23 @@ function Header() {
               </Button>
               <Tippy content="Message">
                 <button className={cx('message-btn')}>
-                  <FontAwesomeIcon icon={faPaperPlane} />
+                  <UploadIcon />
                 </button>
               </Tippy>
               <div className={cx('inbox-wrapper')}>
                 <Tippy content="Inbox">
                   <button className={cx('inbox-btn')}>
-                    <FontAwesomeIcon icon={faMessage} />
+                    <InboxIcon />
                   </button>
                 </Tippy>
               </div>
               <Menu items={USER_MENU} onChange={handleMenuChange}>
-                <img
+                <Image
                   className={cx('avatar')}
-                  src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tos-alisg-avt-0068/7322552705711341569.jpeg?lk3s=a5d48078&nonce=53542&refresh_token=9c5beeae6f5b7c12c7adff984b4ccbdd&x-expires=1724245200&x-signature=jvShsQT52GiMSdxPB5PVDT9d2YY%3D&shp=a5d48078&shcp=81f88b70"
+                  src="https://p16-sign-sg.tiktokdcdn.com/aweme/720x720/tos-alisg-avt-0068/7322552705711341569.jpeg?lk3s=a5d48078&nonce=53542&refresh_token=9c5beeae6f5b7c12c7adff984b4ccbdd&x-expires=1724245200&x-signature=jvShsQT52GiMSdxPB5PVDT9d2YY%3D&shp=a5d48078&shcp=81f88b70"
                   alt="Le Thi Hong Nhung"
-                ></img>
+                  fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
+                ></Image>
               </Menu>
             </div>
           ) : (

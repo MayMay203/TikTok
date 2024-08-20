@@ -14,9 +14,9 @@ function Search() {
   const [searchResult, setSearchResult] = useState([])
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   setSearchResult([1, 2, 3])
-    // }, 0)
+    setTimeout(() => {
+      setSearchResult([1, 2, 3])
+    }, 0)
   }, [])
 
   return (
