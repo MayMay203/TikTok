@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCheck,
+  faCoins,
   faCommentDots,
   faEllipsisVertical,
   faHouseFlag,
@@ -10,6 +11,9 @@ import {
   faLanguage,
   faMoon,
   faPlus,
+  faRightFromBracket,
+  faScrewdriverWrench,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { faMessage, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import Tippy from '@tippyjs/react'
@@ -90,6 +94,33 @@ function Header() {
     },
   ]
 
+  // USER MENU
+  const USER_MENU = [
+    {
+      icon: <FontAwesomeIcon icon={faUser} />,
+      title: 'View Profile',
+      to: '/profile',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faCoins} />,
+      title: 'Get Coins',
+      href: 'https://www.tiktok.com/coin?enter_from=web_main_nav',
+    },
+    MENU_ITEMS[0],
+    {
+      icon: <FontAwesomeIcon icon={faScrewdriverWrench} />,
+      title: 'Settings',
+      to: '/setting'
+    },
+    ...MENU_ITEMS.slice(1),
+    {
+      icon: <FontAwesomeIcon icon={faRightFromBracket} />,
+      title: 'Logout',
+      to: '/login',
+      separate: true
+    }
+  ]
+
   // Handle select menu
   const handleMenuChange = (menuItem) => {
     switch (menuItem.type) {
@@ -143,7 +174,7 @@ function Header() {
                   </button>
                 </Tippy>
               </div>
-              <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+              <Menu items={USER_MENU} onChange={handleMenuChange}>
                 <img
                   className={cx('avatar')}
                   src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tos-alisg-avt-0068/7322552705711341569.jpeg?lk3s=a5d48078&nonce=53542&refresh_token=9c5beeae6f5b7c12c7adff984b4ccbdd&x-expires=1724245200&x-signature=jvShsQT52GiMSdxPB5PVDT9d2YY%3D&shp=a5d48078&shcp=81f88b70"
