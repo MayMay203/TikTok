@@ -4,15 +4,21 @@
 
     // Menu Item
     .menu-item{
+        font-weight: 600;
         color: var(--text-color);
         margin-left: 0;
         width: 100%;
         justify-content: flex-start;
         padding: 11px 16px;
         white-space: nowrap;
+        height: 42px;
 
         &:hover{
             background: var(--account-item-hover-bg);
+        }
+
+        &.separate{
+            border-top: 1px solid var(--border-color);
         }
     }
 }
@@ -21,3 +27,24 @@
     padding-bottom: 8px;
 }
 
+.header{
+    position: relative;
+    height: 50px;
+    margin-top: -8px;
+}
+
+.back-btn{
+    color: var(--text-color);
+    width: 50px;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.header-title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+}

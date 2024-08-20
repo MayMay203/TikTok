@@ -25,13 +25,17 @@ select,
 textarea,
 button{
     font-size: inherit;
-    font-weight: inherit;
+    font-family: inherit;
 }
 
 input,
 button{
     outline: none;
     border: none;
+}
+
+button{
+    background-color: transparent;
 }
 
 body{
@@ -80,4 +84,20 @@ html ::-webkit-scrollbar-thumb {
 html ::-webkit-scrollbar-track {
     border-radius: 0px;
     background-color: rgba(0, 0, 0, 0);
+}
+
+// Custom tooltip
+body {
+    .tippy-box{
+    background-color: rgba(84, 84, 84, 0.92);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 21px;
+    padding: 4px;
+}
+
+    .tippy-arrow{
+        color: rgba(84, 84, 84, 0.92);
+    }
 }

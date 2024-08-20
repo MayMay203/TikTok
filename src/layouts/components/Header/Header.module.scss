@@ -3,7 +3,7 @@
     height: var(--default-header-height);
     padding-left: 15px;
     padding-right: 24px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     background-color: var(--header-bg);
 }
 
@@ -35,4 +35,57 @@
 
 .logo{
     height: 100%;
+    color: var(--logo-bg);
 }
+
+.current-user{
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+}
+
+.avatar{
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.inbox-wrapper{
+    height: 100%;
+    position: relative;
+
+    &::after{
+        content: "10";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -4px;
+        left: 19px;
+        min-width: 20px;
+        min-height: 20px;
+        border-radius: 50%;
+        color: #fff;
+        background-color: var(--primary-color);
+        font-size: 1.4rem;
+    }
+}
+
+.inbox-btn{
+    color: var(--text-color);
+    padding: 0 4px;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-top: 5px;
+}
+
+.message-btn{
+    color: var(--text-color);
+    padding: 0 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 2rem;
+}
+

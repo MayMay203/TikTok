@@ -1,1 +1,1 @@
-export { SearchIcon} from './Icon'
+export { SearchIcon, Logo, UploadIcon, InboxIcon, UserIcon, CoinIcon, CreatorIcon, SettingIcon, LanguageIcon, FeedbackIcon, LogoutIcon, ChartIcon, HubIcon, StudioIcon} from './Icon'

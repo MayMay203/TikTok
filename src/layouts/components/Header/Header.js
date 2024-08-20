@@ -1,53 +1,210 @@
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCommentDots, faEllipsisVertical, faHouseFlag, faLanguage, faMoon} from '@fortawesome/free-solid-svg-icons'
+import {
+  faCheck,
+  faEllipsisVertical,
+  faPlus
+} from '@fortawesome/free-solid-svg-icons'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css' // optional
 
 import styles from './Header.module.scss'
-import images from '~/assets/images'
 import Search from '~/layouts/components/Search'
 import Button from '~/components/Button'
 import Menu from '~/components/Popper/Menu'
+import { CreatorIcon, InboxIcon, LanguageIcon, Logo } from '~/components/Icon'
+import { UploadIcon } from '~/components/Icon'
+import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, SettingIcon, StudioIcon, UserIcon } from '~/components/Icon/Icon'
+import Image from '~/components/Image'
 
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 function Header() {
-
   // MENU ITEMS
   const MENU_ITEMS = [
     {
-      icon: <FontAwesomeIcon icon={faHouseFlag} />,
+      icon: <CreatorIcon/>,
       title: 'Creator tools',
+      children: {
+        title: 'Creator tools',
+        data: [
+          {
+            icon: <HubIcon/>,
+            title: 'LIVE Creator Hub',
+            to: 'https://www.tiktok.com/live/creators/vi-VN/?enter_from=more&lang=en&region=VN',
+          },
+        ],
+      },
     },
     {
-      icon: <FontAwesomeIcon icon={faLanguage} />,
+      icon: <LanguageIcon/>,
       title: 'English',
+      children: {
+        title: 'Language',
+        data: [
+          {
+            type: 'language',
+            code: 'en',
+            title: 'English',
+          },
+          {
+            type: 'language',
+            code: 'vi',
+            title: 'Tiếng Việt',
+          },
+        ],
+      },
     },
     {
-      icon: <FontAwesomeIcon icon={faCommentDots} />,
+      icon: <FeedbackIcon/>,
       title: 'Feedback and help',
-      to: '/feedback'
+      to: '/feedback',
     },
     {
-      icon: <FontAwesomeIcon icon={faMoon} />,
-      title: 'Dark mode',
+      icon: <DarkIcon/>,
+      title: 'Dark Mode',
+      children: {
+        title: 'Dark Mode',
+        data: [
+          {
+            type: 'darkmode',
+            title: 'Use Device Theme',
+            icon: <FontAwesomeIcon icon={faCheck} />,
+          },
+          {
+            type: 'darkmode',
+            title: 'Dark Mode',
+            icon: <svg style={{ width: '24px' }}></svg>,
+          },
+          {
+            type: 'darkmode',
+            title: 'Light Mode',
+            icon: <svg style={{ width: '24px' }}></svg>,
+          },
+        ],
+      },
     },
   ]
+
+  // USER MENU
+  const USER_MENU = [
+    {
+      icon: <UserIcon />,
+      title: 'View Profile',
+      to: '/profile',
+    },
+    {
+      icon: <CoinIcon />,
+      title: 'Get Coins',
+      href: 'https://www.tiktok.com/coin?enter_from=web_main_nav',
+    },
+    {
+      icon: <CreatorIcon />,
+      title: 'Creator Tools',
+      children: {
+        title: 'Creator Tools',
+        data: [
+          {
+            icon: <ChartIcon />,
+            title: 'View Analytics',
+          },
+          {
+            icon: <StudioIcon />,
+            title: 'LIVE Studio'
+          },
+          {
+            icon: <HubIcon />,
+            title: 'LIVE Creator Hub'
+          }
+        ]
+      }
+    },
+    {
+      icon: <SettingIcon />,
+      title: 'Settings',
+      to: '/setting',
+    },
+    ...MENU_ITEMS.slice(1),
+    {
+      icon: <LogoutIcon />,
+      title: 'Logout',
+      to: '/login',
+      separate: true,
+    },
+  ]
+
+  // Handle select menu
+  const handleMenuChange = (menuItem) => {
+    switch (menuItem.type) {
+      case 'language':
+        // Handle logic
+        break
+      // not Optimal
+      case 'darkmode':
+        switch (menuItem.title) {
+          case 'Light Mode':
+            document.querySelector('html').classList.remove('dark')
+            localStorage.setItem('dark', false)
+            break
+          case 'Dark Mode':
+            localStorage.setItem('dark', true)
+            document.querySelector('html').classList.add('dark')
+            break
+          default:
+            document.querySelector('html').classList.remove('dark')
+        }
+        break
+      default:
+        throw new Error('Failed to handle logic menu')
+    }
+  }
+
+  const currentUser = true
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
         <Link to="/" className={cx('logo-wrapper')}>
-          <img src={images.logoLight} alt="logo" className={cx('logo')} />
-          {/* <img src={images.logoDark} alt="logo" className={cx('logo')} /> */}
+          <Logo className={cx('logo')} />
         </Link>
         <Search />
-        {/* Actions */}
+
         <div className={cx('actions')}>
-          <Button primary>Login</Button>
-          <Menu items={MENU_ITEMS}>
-            <button className={cx('more-btn')}>
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </button>
-          </Menu>
+          {currentUser ? (
+            <div className={cx('current-user')}>
+              <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                Upload
+              </Button>
+              <Tippy content="Message">
+                <button className={cx('message-btn')}>
+                  <UploadIcon />
+                </button>
+              </Tippy>
+              <div className={cx('inbox-wrapper')}>
+                <Tippy content="Inbox">
+                  <button className={cx('inbox-btn')}>
+                    <InboxIcon />
+                  </button>
+                </Tippy>
+              </div>
+              <Menu items={USER_MENU} onChange={handleMenuChange}>
+                <Image
+                  className={cx('avatar')}
+                  src="https://p16-sign-sg.tiktokdcdn.com/aweme/720x720/tos-alisg-avt-0068/7322552705711341569.jpeg?lk3s=a5d48078&nonce=53542&refresh_token=9c5beeae6f5b7c12c7adff984b4ccbdd&x-expires=1724245200&x-signature=jvShsQT52GiMSdxPB5PVDT9d2YY%3D&shp=a5d48078&shcp=81f88b70"
+                  alt="Le Thi Hong Nhung"
+                  fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
+                ></Image>
+              </Menu>
+            </div>
+          ) : (
+            <>
+              <Button primary>Login</Button>
+              <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                <button className={cx('more-btn')}>
+                  <FontAwesomeIcon icon={faEllipsisVertical} />
+                </button>
+              </Menu>
+            </>
+          )}
         </div>
       </div>
     </header>
