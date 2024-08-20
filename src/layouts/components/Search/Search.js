@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames/bind'
@@ -11,18 +11,31 @@ import AccountItem from '~/components/AccountItem'
 
 const cx = classNames.bind(styles)
 function Search() {
-  const [searchResult, setSearchResult] = useState([])
+  const [searchValue, setSearchValue] = useState('')
+  const [searchResult, setSearchResult] = useState([1, 2, 3, 4])
+  const [showResult, setShowResult] = useState(true)
 
+  const inputRef = useRef()
   useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([1, 2, 3])
-    }, 0)
+    // setTimeout(() => {
+    //   setSearchResult([1, 2, 3])
+    // }, 0)
   }, [])
+
+  const handleClear = () => {
+    setSearchValue('')
+    setSearchResult([])
+    inputRef.current.focus()
+  }
+
+  const handleHideResult = () => {
+    setShowResult(false)
+  }
 
   return (
     <Tippy
       interactive
-      visible={searchResult.length > 0}
+      visible={showResult && searchResult.length > 0}
       render={(attrs) => (
         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
@@ -34,15 +47,27 @@ function Search() {
           </PopperWrapper>
         </div>
       )}
+      onClickOutside={handleHideResult}
     >
       <div className={cx('search')}>
-        <input type="text" className={cx('search-input')} placeholder="Search" spellCheck="false"></input>
+        <input
+          ref={inputRef}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          type="text"
+          className={cx('search-input')}
+          placeholder="Search"
+          spellCheck="false"
+          onFocus={()=> setShowResult(true)}
+        ></input>
         {/* Clear */}
-        <button className={cx('clear')}>
-          <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
-        </button>
+        {!!searchValue && (
+          <button className={cx('clear')} onClick={handleClear}>
+            <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
+          </button>
+        )}
         {/* Loading */}
-        <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />
+        {/* <FontAwesomeIcon icon={faSpinner} className={cx('loading')} /> */}
         <span className={cx('search-line')}></span>
         {/* Search Icon */}
         <button className={cx('search-btn')}>
