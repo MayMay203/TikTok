@@ -5,16 +5,17 @@ import Friends from '~/pages/Friends'
 import Live from '~/pages/Live'
 import Profile from '~/pages/Profile'
 import Upload from '~/pages/Upload'
+import routesConfig from '~/config/routes'
 
 // Public Routes
 const publicRoutes = [
-  { path: '/', component: Home },
-  { path: '/explore', component: Explore },
-  { path: '/following', component: Following },
-  { path: '/friends', component: Friends },
-  { path: '/live', component: Live },
-  { path: '/:nickname', component: Profile },
-  {path: '/upload', component: Upload}
+  { path: routesConfig.home, component: Home },
+  { path: routesConfig.explore, component: Explore },
+  { path: routesConfig.following, component: Following },
+  { path: routesConfig.friends, component: Friends },
+  { path: routesConfig.live, component: Live },
+  { path: routesConfig.profile, component: Profile },
+  {path: routesConfig.upload, component: Upload}
   // {path: '/upload', component: Upload, layout: null}
 ]
 

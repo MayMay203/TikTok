@@ -17,6 +17,7 @@ import { CreatorIcon, InboxIcon, LanguageIcon, Logo } from '~/components/Icon'
 import { UploadIcon } from '~/components/Icon'
 import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, SettingIcon, StudioIcon, UserIcon } from '~/components/Icon/Icon'
 import Image from '~/components/Image'
+import routesConfig from '~/config/routes'
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -163,7 +164,7 @@ function Header() {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <Link to="/" className={cx('logo-wrapper')}>
+        <Link to={routesConfig.home} className={cx('logo-wrapper')}>
           <Logo className={cx('logo')} />
         </Link>
         <Search />
