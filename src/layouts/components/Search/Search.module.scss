@@ -92,6 +92,19 @@
    color: var(--clear-loading-color);
 }
 
+.loading{
+    animation: spinner .8s linear infinite;
+}
+
+@keyframes spinner{
+   from{
+    transform: translateY(-50%) rotate(0);
+   }
+   to{
+    transform: translateY(-50%) rotate(360deg);
+   }
+}
+
 
 
 

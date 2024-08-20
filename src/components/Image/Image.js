@@ -9,7 +9,6 @@ const Image = forwardRef(({ src, alt, className, fallback: customFallback = imag
   const handleError = () => {
      setFallback(customFallback)
     }
-    console.log(className)
   return <img className={classNames(styles.wrapper, className)} ref={ref} src={fallback || src} alt={alt} {...props} onError={handleError}></img>
 })
 
