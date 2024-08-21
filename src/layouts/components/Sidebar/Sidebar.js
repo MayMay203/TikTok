@@ -5,8 +5,21 @@ import MenuItem from './Menu/MenuItem';
 import Menu from './Menu';
 import { ExploreActiveIcon, ExploreIcon, FollowingActiveIcon, FollowingIcon, FriendActiveIcon, FriendIcon, HomeActiveIcon, HomeIcon, LiveActiveIcon, LiveIcon } from '~/components/Icon';
 import config from '~/config';
+import SuggestedAccount from '~/components/SuggestedAccount';
+import { useEffect, useState } from 'react';
+import * as suggestService from '~/services/suggestService';
+
 const cx = classNames.bind(styles);
 function Sidebar() {
+  const [dataList, setDataList] = useState([]);
+  useEffect(() => {
+    const fetchApi = async () => {
+      const data = await suggestService.findSugAccounts();
+      setDataList(data);
+    }
+    fetchApi();
+  },[])
+
   return (
     <aside className={cx('wrapper')}>
       <Menu>
@@ -24,6 +37,7 @@ function Sidebar() {
           }}
         />
       </Menu>
+      <SuggestedAccount label='Suggested for you' data={dataList} />
     </aside>
   )
 }

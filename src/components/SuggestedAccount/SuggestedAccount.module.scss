@@ -1,0 +1,73 @@
+.wrapper{
+    padding: 16px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+// Account Item
+.label{
+    color: var(--account-sug-item-color);
+    font-size: 1.4rem;
+    line-height: 1.285;
+    padding: 0 8px;
+    margin-bottom: 8px;
+}
+
+.account-item{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    padding: 8px;
+
+    &:hover{
+        background-color: var(--account-item-hover-bg);
+    }
+}
+
+.avatar-wrapper{
+    width: 32px;
+    height: 32px;
+}
+
+.avatar{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+}
+
+.username{
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.3125;
+    white-space: nowrap;
+}
+
+.check-icon{
+    width: 1.4rem;
+    color: rgb(32, 213, 236);
+}
+
+.name{
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--account-sug-item-color);
+}
+
+.more-btn{
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-top: 8px;
+    padding: 0 8px;
+    color: var(--primary-color);
+}

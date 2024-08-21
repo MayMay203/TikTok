@@ -27,11 +27,11 @@ function AccountItem({ data}) {
       <div className={cx('user')}>
         <Image className={cx('avatar')} src={data.avatar} alt="avatar"></Image>
         <div className={cx('info')}>
-          <h4 className={cx('name')}>
-            <span>{data.full_name}</span>
+          <h4 className={cx('username')}>
+            <span>{data.nickname}</span>
             {data.tick && <FontAwesomeIcon className={cx('check-icon')} icon={faCheckCircle}></FontAwesomeIcon>}
           </h4>
-          <span className={cx('username')}>{data.nickname}</span>
+          <span className={cx('name')}>{data.full_name}</span>
         </div>
       </div>
       <Menu items={ACCOUNT_MENU} customHover>

@@ -11,7 +11,6 @@ function MenuItem({ title, to, icon,activeIcon, avatar }) {
     <NavLink
       to={to}
       className={(nav) => {
-        console.log('NavLink: ', nav)
         return cx('menu-item', { active: nav.isActive })
       }}
     >
