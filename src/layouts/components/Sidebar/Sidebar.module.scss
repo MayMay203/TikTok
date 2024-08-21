@@ -1,5 +1,11 @@
 .wrapper{
-    padding: 20px 8px;
-    background-color: orange;
+    padding: 20px 0px 26px 8px;
+    background-color: var(--sidebar-bg);
     width: 240px;
+}
+
+.icon{
+    width: 32px;
+    height: 32px;
+    padding: 4px;
 }

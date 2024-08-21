@@ -9,7 +9,7 @@ import { IrrelevantIcon, ReportIcon } from '../Icon/Icon'
 import Menu from '../Popper/Menu'
 
 const cx = classNames.bind(styles)
-function AccountItem({ data, accountMenu = [] }) {
+function AccountItem({ data}) {
   // ACCOUNT MENU
   const ACCOUNT_MENU = [
     {
@@ -47,7 +47,6 @@ function AccountItem({ data, accountMenu = [] }) {
 
 AccountItem.propTypes = {
   data: PropTypes.object.isRequired,
-  accountMenu: PropTypes.array.isRequired,
 }
 
 export default AccountItem

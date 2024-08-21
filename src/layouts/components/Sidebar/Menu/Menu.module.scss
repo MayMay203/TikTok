@@ -1,0 +1,54 @@
+.navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.menu-item{
+    height: 48px;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    padding: 8px;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1.333;
+    border-radius: 4px;
+    
+
+    &.active{
+        color: var(--primary-color);
+
+        .icon{
+            display: none;
+        }
+
+        .active-icon{
+            display: flex;
+        }
+    }
+
+    &:hover{
+       background-color: var(--account-item-hover-bg);
+    }
+}
+
+.avatar{
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.icon{
+    display: flex;
+}
+
+.active-icon{
+    display: none;
+}
+
+.title{
+    flex: 1;    
+}
