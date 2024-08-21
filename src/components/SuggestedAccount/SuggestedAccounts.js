@@ -9,7 +9,7 @@ function SuggestedAccount({ label, data }) {
     const [content, setContent] = useState('See more')
   return (
     <div className={cx('wrapper')}>
-      <p className={cx('label')}>{label}</p>
+      <h3 className={cx('label')}>{label}</h3>
       {data.map((acc) => (
         <AccountItem key={acc.id} data={acc} />
       ))}
