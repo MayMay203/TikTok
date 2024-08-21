@@ -11,7 +11,7 @@ import { useState } from 'react'
 const cx = classNames.bind(styles)
 
 const defaultFn = () => {}
-function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false}) {
+function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false, customHover=false}) {
   const [history, setHistory] = useState([{ data: items }])
   const current = history[history.length - 1]
 
@@ -20,6 +20,7 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false}
       const isParent = !!item.children
       return (
         <MenuItem
+          customHover={customHover}
           key={index}
           data={item}
           onClick={() => {
@@ -74,5 +75,6 @@ Menu.propTypes = {
   items: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   hideOnClick: PropTypes.bool,
+  customHover: PropTypes.bool
 }
 export default Menu

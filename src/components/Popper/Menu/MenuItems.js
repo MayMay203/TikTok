@@ -4,12 +4,13 @@ import classNames from "classnames/bind";
 import PropTypes from 'prop-types';
 
 const cx = classNames.bind(styles);
-function MenuItem({ data, onClick }) {
+function MenuItem({ data, onClick, customHover }) {
   const classes = cx('menu-item', {
-    separate: data.separate
+    separate: data.separate,
+    customHover
   })
     return (
-      <Button className={classes} leftIcon={data.icon} to={data.to} onClick={onClick}>
+      <Button className={classes} leftIcon={data.icon} to={data.to} onClick={onClick} >
         {data.title}
       </Button>
     )
