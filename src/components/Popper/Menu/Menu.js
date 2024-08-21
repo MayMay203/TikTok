@@ -33,33 +33,35 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false}
     })
   }
   return (
-    <Tippy
-      onHide={() => {
-        setHistory((prev) => prev.slice(0, 1))
-      }}
-      delay={[0, 700]}
-      interactive
-      placement="bottom-end"
-      offset={[10, 8]}
-      hideOnClick={hideOnClick}
-      render={(attrs) => (
-        <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
-          <PopperWrapper className={cx('menu-popper')}>
-            {history.length > 1 && (
-              <Header
-                title={current.title}
-                onBack={() => {
-                  setHistory((prev) => prev.slice(0, prev.length - 1))
-                }}
-              />
-            )}
-            <div className={cx('menu-body')}> {renderItems()}</div>
-          </PopperWrapper>
-        </div>
-      )}
-    >
-      {children}
-    </Tippy>
+  <div>
+      <Tippy
+        onHide={() => {
+          setHistory((prev) => prev.slice(0, 1))
+        }}
+        delay={[0, 700]}
+        interactive
+        placement="bottom-end"
+        offset={[10, 8]}
+        hideOnClick={hideOnClick}
+        render={(attrs) => (
+          <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-popper')}>
+              {history.length > 1 && (
+                <Header
+                  title={current.title}
+                  onBack={() => {
+                    setHistory((prev) => prev.slice(0, prev.length - 1))
+                  }}
+                />
+              )}
+              <div className={cx('menu-body')}> {renderItems()}</div>
+            </PopperWrapper>
+          </div>
+        )}
+      >
+        {children}
+      </Tippy>
+  </div>
   )
 }
 

@@ -19,7 +19,7 @@ function AccountItem({data}) {
           <span className={cx('username')}>{data.nickname}</span>
         </div>
       </div>
-      <div classNames={cx('more')}>
+      <div className={cx('more')}>
         <button className={cx('more-btn')}>
           <FontAwesomeIcon icon={faEllipsis} />
         </button>
