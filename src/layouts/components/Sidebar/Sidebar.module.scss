@@ -1,5 +1,43 @@
 .wrapper{
-    padding: 20px 8px;
-    background-color: orange;
+    padding: 20px 0px 26px 8px;
+    background-color: var(--sidebar-bg);
     width: 240px;
+}
+
+.icon{
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+}
+
+.footer{
+    padding: 16px 0 0 8px;
+}
+
+.reward-link{
+    display: inline-block;
+    width: 100%;
+    height: 52px;
+    position: relative;
+}
+
+.reward-img{
+    width: 100%;
+    height: 100%;
+}
+
+.reward-text{
+    width: 70%;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    color: #fff5c9;
+    font-size: 1.4rem;
+    line-height: 1.2;
+}
+
+.copy-right{
+    margin-top: 12px;
+    color: #8a8b91;
+    font-size: 1.2rem;
 }

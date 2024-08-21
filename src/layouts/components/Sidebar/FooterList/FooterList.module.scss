@@ -1,0 +1,39 @@
+
+
+// Footer item
+.footer-item{
+    width: 100%;
+    margin-top: 15px;
+    color: #8a8b91;
+}
+
+.footer-title{
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.5rem;
+
+    &.isOpen{
+        color: var(--text-color);
+    }
+}
+
+.footer-links{
+    flex-wrap: wrap;;
+    margin-top: 5px;
+    column-gap: 6px;
+    display: none;
+
+    &.isOpen{
+        display: flex;
+    }
+}
+
+.footer-link{
+    color: var(--footer-link-color);
+    font-size: 1.2rem;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
