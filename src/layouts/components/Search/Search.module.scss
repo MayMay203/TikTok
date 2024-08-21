@@ -1,5 +1,5 @@
 .search{
-    --search-btn-width: 52px;
+    --search-btn-width: 53px;
 
     width: 500px;
     height: 46px;
@@ -11,7 +11,7 @@
     overflow: hidden;
     border: 1px solid transparent;
     position: relative;
-    margin-left: 175px;
+    margin-left: 179px;
 
     &:focus-within{
         border-color: var(--search-border-color);
@@ -28,6 +28,8 @@
         caret-color: var(--primary-color);
         color: var(--search-input-color);
         padding-right: 40px;
+        height: 21px;
+        line-height: 21px;
 
         &:hover ~ .search-btn{
             background-color: var(--search-btn-hover-bg);
@@ -60,7 +62,7 @@
 
     &-line{
         display: inline-block;
-        width: 1px;
+        width: 0.5px;
         height: calc(100% - 18px);
         background-color: var(--search-line-bg);
     }
