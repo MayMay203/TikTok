@@ -160,7 +160,7 @@ function Header() {
     }
   }
 
-  const currentUser = true
+  const currentUser = false
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -198,7 +198,7 @@ function Header() {
             </div>
           ) : (
             <>
-              <Button primary>Login</Button>
+              <Button primary to='/'>Login</Button>
               <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                 <button className={cx('more-btn')}>
                   <FontAwesomeIcon icon={faEllipsisVertical} />
