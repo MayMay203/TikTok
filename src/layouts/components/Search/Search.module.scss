@@ -1,5 +1,5 @@
 .search{
-    --search-btn-width: 53px;
+    --search-btn-width: 52px;
 
     width: 500px;
     height: 46px;
@@ -41,13 +41,14 @@
 
         &::placeholder{
             color: var(--search-placeholder-color);
+            font-weight: 400;
         }
     }
 
     &-btn{
         width: var(--search-btn-width);
         height: 100%;
-        padding: 11px 16px 11px 12px;
+        padding: 10px 16px 13px 12.5px;
         background-color: transparent;
         cursor: pointer;
 

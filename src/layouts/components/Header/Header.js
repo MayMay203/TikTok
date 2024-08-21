@@ -17,7 +17,7 @@ import { CreatorIcon, InboxIcon, LanguageIcon, Logo } from '~/components/Icon'
 import { UploadIcon } from '~/components/Icon'
 import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, SettingIcon, StudioIcon, UserIcon } from '~/components/Icon/Icon'
 import Image from '~/components/Image'
-import routesConfig from '~/config/routes'
+import config from '~/config'
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -43,56 +43,6 @@ function Header() {
       children: {
         title: 'Language',
         data: [
-          {
-            type: 'language',
-            code: 'en',
-            title: 'English',
-          },
-          {
-            type: 'language',
-            code: 'vi',
-            title: 'Tiếng Việt',
-          },
-          {
-            type: 'language',
-            code: 'en',
-            title: 'English',
-          },
-          {
-            type: 'language',
-            code: 'vi',
-            title: 'Tiếng Việt',
-          },
-          {
-            type: 'language',
-            code: 'en',
-            title: 'English',
-          },
-          {
-            type: 'language',
-            code: 'vi',
-            title: 'Tiếng Việt',
-          },
-          {
-            type: 'language',
-            code: 'en',
-            title: 'English',
-          },
-          {
-            type: 'language',
-            code: 'vi',
-            title: 'Tiếng Việt',
-          },
-          {
-            type: 'language',
-            code: 'en',
-            title: 'English',
-          },
-          {
-            type: 'language',
-            code: 'vi',
-            title: 'Tiếng Việt',
-          },
           {
             type: 'language',
             code: 'en',
@@ -210,11 +160,11 @@ function Header() {
     }
   }
 
-  const currentUser = true
+  const currentUser = false
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <Link to={routesConfig.home} className={cx('logo-wrapper')}>
+        <Link to={config.routes.home} className={cx('logo-wrapper')}>
           <Logo className={cx('logo')} />
         </Link>
         <Search />
@@ -240,7 +190,7 @@ function Header() {
               <Menu items={USER_MENU} onChange={handleMenuChange}>
                 <Image
                   className={cx('avatar')}
-                  src="https://p16-sign-sg.tiktokdcdn.com/aweme/720x720/tos-alisg-avt-0068/7322552705711341569.jpeg?lk3s=a5d48078&nonce=53542&refresh_token=9c5beeae6f5b7c12c7adff984b4ccbdd&x-expires=1724245200&x-signature=jvShsQT52GiMSdxPB5PVDT9d2YY%3D&shp=a5d48078&shcp=81f88b70"
+                  src=""
                   alt="Le Thi Hong Nhung"
                   fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
                 ></Image>
@@ -248,7 +198,7 @@ function Header() {
             </div>
           ) : (
             <>
-              <Button primary>Login</Button>
+              <Button primary to='/'>Login</Button>
               <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                 <button className={cx('more-btn')}>
                   <FontAwesomeIcon icon={faEllipsisVertical} />

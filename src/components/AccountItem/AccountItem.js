@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './AccountItem.module.scss'
 import classNames from 'classnames/bind'
@@ -6,7 +7,7 @@ import { Link } from 'react-router-dom'
 import Image from '../Image'
 
 const cx = classNames.bind(styles)
-function AccountItem({data}) {
+function AccountItem({ data }) {
   return (
     <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
       <div className={cx('user')}>
@@ -19,13 +20,17 @@ function AccountItem({data}) {
           <span className={cx('username')}>{data.nickname}</span>
         </div>
       </div>
-      <div classNames={cx('more')}>
+      <div className={cx('more')}>
         <button className={cx('more-btn')}>
           <FontAwesomeIcon icon={faEllipsis} />
         </button>
       </div>
     </Link>
   )
+}
+
+AccountItem.propTypes = {
+  data: PropTypes.object.isRequired,
 }
 
 export default AccountItem

@@ -7,9 +7,9 @@ import Tippy from '@tippyjs/react/headless'
 import styles from './Search.module.scss'
 import { SearchIcon } from '~/components/Icon'
 import { Wrapper as PopperWrapper } from '~/components/Popper'
-import AccountItem from '~/components/AccountItem'
 import useDebounce from '~/hook/useDebounce'
-import * as searchService from '~/apiServices/searchService'
+import * as searchService from '~/services/searchService'
+import AccountList from '~/components/AccountList'
 
 const cx = classNames.bind(styles)
 function Search() {
@@ -18,7 +18,7 @@ function Search() {
   const [showResult, setShowResult] = useState(true)
   const [loading, setLoading] = useState(false)
 
-  const debounced = useDebounce(searchValue.trim(), 500)
+  const debouncedValue = useDebounce(searchValue.trim(), 500)
 
   const inputRef = useRef()
   useEffect(() => {
@@ -30,7 +30,7 @@ function Search() {
     const fetchApi = async () => {
       setLoading(true)
 
-      const data = await searchService.search(debounced)
+      const data = await searchService.search(debouncedValue)
       setSearchResult(data)
 
       setLoading(false)
@@ -38,7 +38,7 @@ function Search() {
 
     fetchApi()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounced])
+  }, [debouncedValue])
 
   const handleClear = () => {
     setSearchValue('')
@@ -51,50 +51,50 @@ function Search() {
   }
 
   return (
-    <Tippy
-      interactive
-      visible={showResult && searchResult.length > 0}
-      render={(attrs) => (
-        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-          <PopperWrapper>
-            <h4 className={cx('search-title')}>Accounts</h4>
-            {searchResult.map((data) => (
-              <AccountItem key={data.id} data={data} />
-            ))}
-          </PopperWrapper>
-        </div>
-      )}
-      onClickOutside={handleHideResult}
-    >
-      <div className={cx('search')}>
-        <input
-          ref={inputRef}
-          value={searchValue}
-          onChange={(e) => {
-            e.target.value = e.target.value.trimStart()
-            setSearchValue(e.target.value)
-          }}
-          type="text"
-          className={cx('search-input')}
-          placeholder="Search"
-          spellCheck="false"
-          onFocus={() => setShowResult(true)}
-        ></input>
-        {/* Clear */}
-        {!!searchValue && !loading && (
-          <button className={cx('clear')} onClick={handleClear}>
-            <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
-          </button>
+ <div>
+      <Tippy
+        interactive
+        visible={showResult && searchResult.length > 0}
+        render={(attrs) => (
+          <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+            <PopperWrapper>
+              <h4 className={cx('search-title')}>Accounts</h4>
+              <AccountList data={searchResult} />
+            </PopperWrapper>
+          </div>
         )}
-        {/* Loading */}
-        {loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />}
-        <span className={cx('search-line')}></span>
-        {/* Search Icon */}
-        <button className={cx('search-btn')}>
-          <SearchIcon className={cx('search-icon')} />
-        </button>
-      </div>
-    </Tippy>
+        onClickOutside={handleHideResult}
+      >
+        <div className={cx('search')}>
+          <input
+            ref={inputRef}
+            value={searchValue}
+            onChange={(e) => {
+              e.target.value = e.target.value.trimStart()
+              setSearchValue(e.target.value)
+            }}
+            type="text"
+            className={cx('search-input')}
+            placeholder="Search"
+            spellCheck="false"
+            onFocus={() => setShowResult(true)}
+          ></input>
+          {/* Clear */}
+          {!!searchValue && !loading && (
+            <button className={cx('clear')} onClick={handleClear}>
+              <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
+            </button>
+          )}
+          {/* Loading */}
+          {loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />}
+          <span className={cx('search-line')}></span>
+          {/* Search Icon */}
+          <button className={cx('search-btn')}>
+            <SearchIcon className={cx('search-icon')} />
+          </button>
+        </div>
+      </Tippy>
+ </div>
   )
 }
 
