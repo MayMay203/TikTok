@@ -18,9 +18,14 @@ import { UploadIcon } from '~/components/Icon'
 import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, SettingIcon, StudioIcon, UserIcon } from '~/components/Icon/Icon'
 import Image from '~/components/Image'
 import config from '~/config'
+import { ThemeContext } from '~/components/Context/ThemeContext'
+import { useContext } from 'react'
+import { UserContext } from '~/components/Context/UserContext'
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind(styles)
 function Header() {
+  const themeContext = useContext(ThemeContext);
+  const isLogin = useContext(UserContext).isLogin
   // MENU ITEMS
   const MENU_ITEMS = [
     {
@@ -111,14 +116,14 @@ function Header() {
           },
           {
             icon: <StudioIcon />,
-            title: 'LIVE Studio'
+            title: 'LIVE Studio',
           },
           {
             icon: <HubIcon />,
-            title: 'LIVE Creator Hub'
-          }
-        ]
-      }
+            title: 'LIVE Creator Hub',
+          },
+        ],
+      },
     },
     {
       icon: <SettingIcon />,
@@ -144,15 +149,16 @@ function Header() {
       case 'darkmode':
         switch (menuItem.title) {
           case 'Light Mode':
-            document.querySelector('html').classList.remove('dark')
-            localStorage.setItem('dark', false)
+            if (themeContext.theme) {
+              themeContext.toggleTheme()
+            }
             break
           case 'Dark Mode':
-            localStorage.setItem('dark', true)
-            document.querySelector('html').classList.add('dark')
+            if (!themeContext.theme) {
+              themeContext.toggleTheme();
+            }
             break
           default:
-            document.querySelector('html').classList.remove('dark')
         }
         break
       default:
@@ -160,7 +166,6 @@ function Header() {
     }
   }
 
-  const currentUser = true
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -170,7 +175,7 @@ function Header() {
         <Search />
 
         <div className={cx('actions')}>
-          {currentUser ? (
+          {isLogin ? (
             <div className={cx('current-user')}>
               <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
@@ -198,7 +203,9 @@ function Header() {
             </div>
           ) : (
             <>
-              <Button primary to='/'>Login</Button>
+              <Button primary to="/">
+                Login
+              </Button>
               <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                 <button className={cx('more-btn')}>
                   <FontAwesomeIcon icon={faEllipsisVertical} />

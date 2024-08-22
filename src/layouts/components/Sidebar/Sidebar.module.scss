@@ -1,5 +1,5 @@
 .wrapper{
-    padding: 20px 0px 26px 8px;
+    padding: 20px 8px 26px 8px;
     background-color: var(--sidebar-bg);
     width: 240px;
 }
@@ -36,8 +36,21 @@
     line-height: 1.2;
 }
 
+.more-link,
 .copy-right{
     margin-top: 12px;
     color: #8a8b91;
     font-size: 1.2rem;
+}
+
+.login-desc{
+    color: var(--login-desc-color);
+    line-height: 1.3125;
+    margin-bottom: 20px;
+}
+
+.login-wrapper{
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px 8px 24px;
 }
