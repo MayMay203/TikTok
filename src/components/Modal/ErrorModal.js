@@ -2,7 +2,6 @@ import { Modal } from "react-bootstrap";
 import PropTypes from 'prop-types';
 import styles from './Modal.module.scss'
 import classNames from "classnames/bind";
-import { useState } from "react";
 
 const cx = classNames.bind(styles);
 function ErrorModal({ title, message, show, onHide }) {

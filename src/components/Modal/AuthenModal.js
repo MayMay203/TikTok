@@ -7,6 +7,7 @@ import Form from '~/components/Form'
 import FormInput from '~/components/Form/FormInput'
 import { login } from '~/services/loginService'
 import ErrorModal from './ErrorModal'
+import { register } from '~/services/registerService'
 
 const cx = classNames.bind(styles)
 function AuthenModal({ showLogin, handleCloseLogin, handleShowLogin }) {
@@ -30,14 +31,24 @@ function AuthenModal({ showLogin, handleCloseLogin, handleShowLogin }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       const data = await login(email, password)
-      console.log('Login successful:', data)
+      console.log('Login successfully:', data)
       handleCloseLogin()
-      // Xử lý thêm sau khi login thành công (ví dụ: lưu thông tin user, chuyển hướng)
     } catch (error) {
       setIsError(true);
+    }
+  }
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await register(email, password);
+      handleShowLogin();
+      console.log('Signup successfully', data);
+    }
+    catch (error) {
+      console.log(error)
     }
   }
 
@@ -110,7 +121,7 @@ function AuthenModal({ showLogin, handleCloseLogin, handleShowLogin }) {
             &times;
           </Button>
         </Modal.Header>
-        <Form action="">
+        <Form onSubmit={handleSignUp} method='POST'>
           <Modal.Body>
             <FormInput
               value={email}

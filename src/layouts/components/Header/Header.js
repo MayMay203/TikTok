@@ -24,6 +24,7 @@ import { UserContext } from '~/components/Context/UserContext'
 import AuthenModal from '~/components/Modal/AuthenModal'
 
 
+
 const cx = classNames.bind(styles)
 function Header() {
   
@@ -84,18 +85,13 @@ function Header() {
         data: [
           {
             type: 'darkmode',
-            title: 'Use Device Theme',
-            icon: <FontAwesomeIcon icon={faCheck} />,
-          },
-          {
-            type: 'darkmode',
             title: 'Dark Mode',
-            icon: <svg style={{ width: '24px' }}></svg>,
+            icon: themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
           },
           {
             type: 'darkmode',
             title: 'Light Mode',
-            icon: <svg style={{ width: '24px' }}></svg>,
+            icon: !themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
           },
         ],
       },
@@ -160,12 +156,14 @@ function Header() {
         switch (menuItem.title) {
           case 'Light Mode':
             if (themeContext.theme) {
-              themeContext.toggleTheme()
+              themeContext.toggleTheme();
+              menuItem.icon = <FontAwesomeIcon icon={faCheck} />;
             }
             break
           case 'Dark Mode':
             if (!themeContext.theme) {
               themeContext.toggleTheme();
+              menuItem.icon = <FontAwesomeIcon icon={faCheck} />
             }
             break
           default:

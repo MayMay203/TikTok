@@ -1,9 +1,13 @@
 import * as request from '~/utils/httpRequest'
 
 export const login = async (email, password) => {
-    const res = await request.post('/auth/login', {
+    try {
+      const res = await request.post('/auth/login', {
         email,
-        password
-    })
-    return res.data
+        password,
+      })
+        return res.data;
+    } catch (error) {
+      console.log('Login error: ', error)
+    }
 }
