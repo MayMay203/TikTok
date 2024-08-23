@@ -7,7 +7,7 @@ import { ExploreActiveIcon, ExploreIcon, FollowingActiveIcon, FollowingIcon, Fri
 import config from '~/config';
 import SuggestedAccount from '~/components/SuggestedAccount';
 import { useContext, useEffect, useState } from 'react';
-import * as suggestService from '~/services/suggestService';
+import * as suggestService from '~/services/getSuggestedUsers';
 import images from '~/assets/images'
 import FooterList from './FooterList';
 import Button from '~/components/Button';
@@ -110,7 +110,7 @@ function Sidebar() {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const data = await suggestService.findSugAccounts()
+      const data = await suggestService.getSuggestedUsers()
       setDataList(data)
     }
     fetchApi()

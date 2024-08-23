@@ -21,6 +21,7 @@ import config from '~/config'
 import { ThemeContext } from '~/components/Context/ThemeContext'
 import { useContext } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
+import AuthenModal from '~/components/Modal/AuthenModal'
 
 const cx = classNames.bind(styles)
 function Header() {
@@ -167,55 +168,53 @@ function Header() {
   }
 
   return (
-    <header className={cx('wrapper')}>
-      <div className={cx('inner')}>
-        <Link to={config.routes.home} className={cx('logo-wrapper')}>
-          <Logo className={cx('logo')} />
-        </Link>
-        <Search />
-
-        <div className={cx('actions')}>
-          {isLogin ? (
-            <div className={cx('current-user')}>
-              <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                Upload
-              </Button>
-              <Tippy content="Message">
-                <button className={cx('message-btn')}>
-                  <UploadIcon />
-                </button>
-              </Tippy>
-              <div className={cx('inbox-wrapper')}>
-                <Tippy content="Inbox">
-                  <button className={cx('inbox-btn')}>
-                    <InboxIcon />
+      <header className={cx('wrapper')}>
+        <div className={cx('inner')}>
+          <Link to={config.routes.home} className={cx('logo-wrapper')}>
+            <Logo className={cx('logo')} />
+          </Link>
+          <Search />
+  
+          <div className={cx('actions')}>
+            {isLogin ? (
+              <div className={cx('current-user')}>
+                <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                  Upload
+                </Button>
+                <Tippy content="Message">
+                  <button className={cx('message-btn')}>
+                    <UploadIcon />
                   </button>
                 </Tippy>
+                <div className={cx('inbox-wrapper')}>
+                  <Tippy content="Inbox">
+                    <button className={cx('inbox-btn')}>
+                      <InboxIcon />
+                    </button>
+                  </Tippy>
+                </div>
+                <Menu items={USER_MENU} onChange={handleMenuChange}>
+                  <Image
+                    className={cx('avatar')}
+                    src=""
+                    alt="Le Thi Hong Nhung"
+                    fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
+                  ></Image>
+                </Menu>
               </div>
-              <Menu items={USER_MENU} onChange={handleMenuChange}>
-                <Image
-                  className={cx('avatar')}
-                  src=""
-                  alt="Le Thi Hong Nhung"
-                  fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
-                ></Image>
-              </Menu>
-            </div>
-          ) : (
-            <>
-              <Button primary to="/">
-                Login
-              </Button>
-              <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                <button className={cx('more-btn')}>
-                  <FontAwesomeIcon icon={faEllipsisVertical} />
-                </button>
-              </Menu>
-            </>
-          )}
+            ) : (
+              <>
+                <AuthenModal/>
+                <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                  <button className={cx('more-btn')}>
+                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                  </button>
+                </Menu>
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
   )
 }
 

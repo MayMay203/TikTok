@@ -1,7 +1,7 @@
 import styles from './FooterList.module.scss'
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import { act, memo, useState } from 'react';
+import {memo, useState } from 'react';
 import FooterItem from './FooterItem';
 
 const cx = classNames.bind(styles);

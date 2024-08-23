@@ -1,0 +1,35 @@
+// Form
+.form{
+    padding: 4px 16px;
+}
+
+// Form input
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.form-label{
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.form-input{
+    height: 42px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px;
+}
+
+.form-input:invalid:not(:focus):not(:placeholder-shown) ~ .form-error {
+    display: block;
+}
+
+.form-error{
+    margin-top: 8px;
+    color: red;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: none;
+}
