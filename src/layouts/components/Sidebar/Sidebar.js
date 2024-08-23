@@ -12,8 +12,16 @@ import images from '~/assets/images'
 import FooterList from './FooterList';
 import Button from '~/components/Button';
 import { UserContext } from '~/components/Context/UserContext';
+import AuthenModal from '~/components/Modal/AuthenModal';
 const cx = classNames.bind(styles)
 function Sidebar() {
+  const [showLogin, setShowLogin] = useState(false)
+  const handleShowLogin = () => setShowLogin(true)
+  const handleCloseLogin = (e) => {
+    setShowLogin(false)
+    e.preventDefault()
+  }
+
   const isLogin = useContext(UserContext).isLogin
   // Sidebar Footer
   const FOOTER_LIST = [
@@ -147,9 +155,10 @@ function Sidebar() {
       {isLogin || (
         <div className={cx('login-wrapper')}>
           <p className={cx('login-desc')}>Log in to follow creators, like videos, and view comments.</p>
-          <Button outline size="large">
+          <Button outline size="large" onClick={handleShowLogin}>
             Login
           </Button>
+          <AuthenModal showLogin={showLogin} handleCloseLogin={handleCloseLogin} handleShowLogin={handleShowLogin}/>
         </div>
       )}
       <div className={cx('footer')}>

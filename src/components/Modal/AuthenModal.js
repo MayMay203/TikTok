@@ -7,16 +7,8 @@ import Form from '~/components/Form'
 import FormInput from '~/components/Form/FormInput'
 
 const cx = classNames.bind(styles)
-function AuthenModal() {
-  const [showLogin, setShowLogin] = useState(false)
+function AuthenModal({showLogin, handleCloseLogin, handleShowLogin}) {
   const [showSignUp, setShowSignUp] = useState(false)
-
-  const handleShowLogin = () => setShowLogin(true)
-  const handleCloseLogin = (e) => {
-    setShowLogin(false)
-    e.preventDefault()
-  }
-
   const handleShowSignUp = () => setShowSignUp(true)
   const handleCloseSignUp = (e) => {
     setShowSignUp(false)
@@ -26,9 +18,6 @@ function AuthenModal() {
   return (
     <>
       {/* Login modal */}
-      <Button primary onClick={handleShowLogin}>
-        Login
-      </Button>
       <Modal show={showLogin} onHide={handleShowLogin} size="md" centered>
         <Modal.Header>
           <h2 className={cx('modal-title')}>Log in to TikTok</h2>
