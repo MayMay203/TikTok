@@ -1,5 +1,5 @@
 import * as request from "~/utils/httpRequest"
-export const findSugAccounts = async () => {
+export const getSuggestedUsers = async () => {
     try {
         const res = await request.get('/users/suggested');
         return res.data;

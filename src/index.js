@@ -2,18 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from '~/App';
 import reportWebVitals from '~/reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js' 
 import GlobalStyles from '~/components/GlobalStyles'
-
-const isDark = localStorage.getItem('dark') === 'true'
-document.querySelector('html').classList.toggle('dark', isDark)
-
+import { ThemeProvider } from './components/Context/ThemeContext';
+import {UserProvider} from './components/Context/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <GlobalStyles>
-      <App />
-      </GlobalStyles>
+   <UserProvider>
+     <ThemeProvider>
+          <GlobalStyles>
+          <App />
+          </GlobalStyles>
+     </ThemeProvider>
+   </UserProvider>
   </React.StrictMode>,
 )
 

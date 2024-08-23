@@ -6,13 +6,15 @@ import Menu from './Menu';
 import { ExploreActiveIcon, ExploreIcon, FollowingActiveIcon, FollowingIcon, FriendActiveIcon, FriendIcon, HomeActiveIcon, HomeIcon, LiveActiveIcon, LiveIcon } from '~/components/Icon';
 import config from '~/config';
 import SuggestedAccount from '~/components/SuggestedAccount';
-import { useEffect, useState } from 'react';
-import * as suggestService from '~/services/suggestService';
+import { useContext, useEffect, useState } from 'react';
+import * as suggestService from '~/services/getSuggestedUsers';
 import images from '~/assets/images'
 import FooterList from './FooterList';
-
+import Button from '~/components/Button';
+import { UserContext } from '~/components/Context/UserContext';
 const cx = classNames.bind(styles)
 function Sidebar() {
+  const isLogin = useContext(UserContext).isLogin
   // Sidebar Footer
   const FOOTER_LIST = [
     {
@@ -103,10 +105,12 @@ function Sidebar() {
       ],
     },
   ]
+
   const [dataList, setDataList] = useState([])
+
   useEffect(() => {
     const fetchApi = async () => {
-      const data = await suggestService.findSugAccounts()
+      const data = await suggestService.getSuggestedUsers()
       setDataList(data)
     }
     fetchApi()
@@ -139,7 +143,15 @@ function Sidebar() {
           }}
         />
       </Menu>
-      <SuggestedAccount label="Suggested for you" data={dataList} />
+      {isLogin && <SuggestedAccount label="Suggested for you" data={dataList} />}
+      {isLogin || (
+        <div className={cx('login-wrapper')}>
+          <p className={cx('login-desc')}>Log in to follow creators, like videos, and view comments.</p>
+          <Button outline size="large">
+            Login
+          </Button>
+        </div>
+      )}
       <div className={cx('footer')}>
         <a
           href="https://effecthouse.tiktok.com/download?utm_campaign=ttweb_entrance_v1&utm_source=tiktok_webapp_main"
