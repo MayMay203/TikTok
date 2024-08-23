@@ -12,9 +12,16 @@ import images from '~/assets/images'
 import FooterList from './FooterList';
 import Button from '~/components/Button';
 import { UserContext } from '~/components/Context/UserContext';
+
 const cx = classNames.bind(styles)
+const INIT_PAGE = 1
+const PER_PAGE = 10
 function Sidebar() {
   const isLogin = useContext(UserContext).isLogin
+  const [perPage, setPerPage] = useState(PER_PAGE)
+  const [suggestedUsers, setSuggestedUsers] = useState([])
+  const [isSeeMore, setIsSeeMore] = useState(false)
+
   // Sidebar Footer
   const FOOTER_LIST = [
     {
@@ -106,15 +113,32 @@ function Sidebar() {
     },
   ]
 
-  const [dataList, setDataList] = useState([])
-
   useEffect(() => {
     const fetchApi = async () => {
-      const data = await suggestService.getSuggestedUsers()
-      setDataList(data)
+      const data = await suggestService.getSuggestedUsers({ page: INIT_PAGE, perPage })
+      setSuggestedUsers(data)
     }
     fetchApi()
   }, [])
+
+  const handleViewChange = (isSeeMore) => {
+    if (!isSeeMore) {
+       suggestService
+         .getSuggestedUsers({ page: INIT_PAGE, perPage: 15})
+         .then((data) => {
+           setSuggestedUsers(data)
+         })
+         .catch((error) => console.log(error))
+    } else {
+      suggestService
+        .getSuggestedUsers({ page: INIT_PAGE, perPage: perPage })
+        .then((data) => {
+          setSuggestedUsers(data)
+        })
+        .catch((error) => console.log(error))
+    }
+    setIsSeeMore(prev => !prev)
+  }
 
   return (
     <aside className={cx('wrapper')}>
@@ -143,7 +167,14 @@ function Sidebar() {
           }}
         />
       </Menu>
-      {isLogin && <SuggestedAccount label="Suggested for you" data={dataList} />}
+      {isLogin && (
+        <SuggestedAccount
+          label="Suggested for you"
+          data={suggestedUsers}
+          onViewChange={handleViewChange}
+          isSeeMore={isSeeMore}
+        />
+      )}
       {isLogin || (
         <div className={cx('login-wrapper')}>
           <p className={cx('login-desc')}>Log in to follow creators, like videos, and view comments.</p>
