@@ -20,6 +20,12 @@
     border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 6px;
+    background-color: transparent;
+    color: var(--text-color);
+
+    &::placeholder{
+        color: var(--text-color);
+    }
 }
 
 .form-input:invalid:not(:focus):not(:placeholder-shown) ~ .form-error {

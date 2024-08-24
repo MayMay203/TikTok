@@ -3,9 +3,9 @@ import styles from './Form.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles)
-function Form({ children, onSubmit }) {
+function Form({ children, onSubmit, className}) {
   return (
-    <form onSubmit={onSubmit} className={cx('form')}>
+    <form onSubmit={onSubmit} className={cx('form',{[className]:className})}>
       {children}
     </form>
   )

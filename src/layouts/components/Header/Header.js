@@ -19,18 +19,17 @@ import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, Setti
 import Image from '~/components/Image'
 import config from '~/config'
 import { ThemeContext } from '~/components/Context/ThemeContext'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
-import { logout } from '~/services/logoutService'
 
 const cx = classNames.bind(styles)
+const menuItems = []
 function Header() {
   const themeContext = useContext(ThemeContext)
   const authContext = useContext(AuthContext)
   const userContext = useContext(UserContext)
   const isLogin = useContext(UserContext).isLogin
-
   // MENU ITEMS
   const MENU_ITEMS = [
     {
@@ -156,15 +155,24 @@ function Header() {
       case 'darkmode':
         switch (menuItem.title) {
           case 'Light Mode':
+            menuItems[0] = menuItem
             if (themeContext.theme) {
               themeContext.toggleTheme()
               menuItem.icon = <FontAwesomeIcon icon={faCheck} />
+              if (menuItems[1]) {
+                menuItems[1].icon = <svg style={{ width: '24px' }}></svg>
+              }
             }
             break
           case 'Dark Mode':
+            menuItems[1] = menuItem
             if (!themeContext.theme) {
               themeContext.toggleTheme()
-              menuItem.icon = <FontAwesomeIcon icon={faCheck} />
+               menuItem.icon = <FontAwesomeIcon icon={faCheck} />
+              if (menuItems[0]) {
+                 
+                 menuItems[0].icon = <svg style={{ width: '24px' }}></svg>
+               }
             }
             break
           default:

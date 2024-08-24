@@ -101,13 +101,13 @@ function AuthProvider({ children }) {
     <AuthContext.Provider value={value}>
       {/* Login modal */}
       <Modal show={showLogin} onHide={handleShowLogin} size="md" centered>
-        <Modal.Header>
+        <Modal.Header className={cx('custom-background', 'custom-border-bg')}>
           <h2 className={cx('modal-title')}>Log in to TikTok</h2>
           <Button className={cx('btn-close')} size="small" onClick={handleCloseLogin}>
             &times;
           </Button>
         </Modal.Header>
-        <Form onSubmit={handleLogin}>
+        <Form onSubmit={handleLogin} className={cx('custom-background')}>
           <Modal.Body>
             <FormInput
               title="Email"
@@ -158,14 +158,14 @@ function AuthProvider({ children }) {
       </Modal>
       {/* Sign up modal */}
       <Modal show={showSignUp} onHide={handleCloseSignUp} size="md" centered>
-        <Modal.Header>
+        <Modal.Header className={cx('custom-background', 'custom-border-bg')}>
           <h2 className={cx('modal-title')}>Sign up for TikTok</h2>
           <Button className={cx('btn-close')} size="small" onClick={handleCloseSignUp}>
             &times;
           </Button>
         </Modal.Header>
-        <Form onSubmit={handleSignUp} method="POST">
-          <Modal.Body>
+        <Form onSubmit={handleSignUp} className={cx('custom-background')}>
+          <Modal.Body className={cx('custom-modal-background')}>
             <FormInput
               value={email}
               title="Email"

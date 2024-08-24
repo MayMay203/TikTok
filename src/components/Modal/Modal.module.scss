@@ -7,10 +7,11 @@
 }
 
 .btn-close{
-   font-size: 4rem;
+   font-size: 3.4rem;
    font-weight: 400;
    min-width: 50px!important;
    margin-left: auto;
+   color: var(--text-color);
 }
 
 .text{
@@ -35,4 +36,12 @@
 .error-msg{
     font-size: 1.5rem;
     font-weight: 600;
+}
+
+.custom-background{
+    background-color: var(--modal-bg);
+}
+
+.custom-border-bg{
+    border-bottom: 1px solid var(--border-color)!important;
 }
