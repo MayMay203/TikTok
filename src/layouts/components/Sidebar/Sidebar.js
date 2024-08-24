@@ -12,17 +12,19 @@ import images from '~/assets/images'
 import FooterList from './FooterList';
 import Button from '~/components/Button';
 import { UserContext } from '~/components/Context/UserContext';
-import AuthenModal from '~/components/Modal/AuthenModal';
-const cx = classNames.bind(styles)
-function Sidebar() {
-  const [showLogin, setShowLogin] = useState(false)
-  const handleShowLogin = () => setShowLogin(true)
-  const handleCloseLogin = (e) => {
-    setShowLogin(false)
-    e.preventDefault()
-  }
+import { AuthContext } from '~/components/Modal/AuthModalContext'
 
+const cx = classNames.bind(styles)
+const INIT_PAGE = 1
+const PER_PAGE = 10
+function Sidebar() {
   const isLogin = useContext(UserContext).isLogin
+  const [perPage, setPerPage] = useState(PER_PAGE)
+  const [suggestedUsers, setSuggestedUsers] = useState([])
+  const [isSeeMore, setIsSeeMore] = useState(false)
+  const authContext = useContext(AuthContext)
+  const userContext = useContext(UserContext)
+
   // Sidebar Footer
   const FOOTER_LIST = [
     {
@@ -114,15 +116,32 @@ function Sidebar() {
     },
   ]
 
-  const [dataList, setDataList] = useState([])
-
   useEffect(() => {
     const fetchApi = async () => {
-      const data = await suggestService.getSuggestedUsers()
-      setDataList(data)
+      const data = await suggestService.getSuggestedUsers({ page: INIT_PAGE, perPage })
+      setSuggestedUsers(data)
     }
     fetchApi()
   }, [])
+
+  const handleViewChange = (isSeeMore) => {
+    if (!isSeeMore) {
+      suggestService
+        .getSuggestedUsers({ page: INIT_PAGE, perPage: 15 })
+        .then((data) => {
+          setSuggestedUsers(data)
+        })
+        .catch((error) => console.log(error))
+    } else {
+      suggestService
+        .getSuggestedUsers({ page: INIT_PAGE, perPage: perPage })
+        .then((data) => {
+          setSuggestedUsers(data)
+        })
+        .catch((error) => console.log(error))
+    }
+    setIsSeeMore((prev) => !prev)
+  }
 
   return (
     <aside className={cx('wrapper')}>
@@ -146,19 +165,25 @@ function Sidebar() {
           title="Profile"
           to="/@maymay203"
           avatar={{
-            src: 'https://p16-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/7322552705711341569.jpeg?lk3s=a5d48078&nonce=99080&refresh_token=43952f4ebaf517bace44ebe415bc2000&x-expires=1724407200&x-signature=RloCzgWgyoWKp6FFSLr37yX7aVg%3D&shp=a5d48078&shcp=81f88b70',
-            alt: 'Nhung',
+            src: userContext.currentUser.avatar,
+            alt: userContext.currentUser.nickname
           }}
         />
       </Menu>
-      {isLogin && <SuggestedAccount label="Suggested for you" data={dataList} />}
+      {isLogin && (
+        <SuggestedAccount
+          label="Suggested for you"
+          data={suggestedUsers}
+          onViewChange={handleViewChange}
+          isSeeMore={isSeeMore}
+        />
+      )}
       {isLogin || (
         <div className={cx('login-wrapper')}>
           <p className={cx('login-desc')}>Log in to follow creators, like videos, and view comments.</p>
-          <Button outline size="large" onClick={handleShowLogin}>
+          <Button outline size="large" onClick={authContext.handleShowLogin}>
             Login
           </Button>
-          <AuthenModal showLogin={showLogin} handleCloseLogin={handleCloseLogin} handleShowLogin={handleShowLogin}/>
         </div>
       )}
       <div className={cx('footer')}>

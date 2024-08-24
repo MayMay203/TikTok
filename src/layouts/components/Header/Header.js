@@ -19,23 +19,15 @@ import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, Setti
 import Image from '~/components/Image'
 import config from '~/config'
 import { ThemeContext } from '~/components/Context/ThemeContext'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
-import AuthenModal from '~/components/Modal/AuthenModal'
-
-
+import { AuthContext } from '~/components/Modal/AuthModalContext'
 
 const cx = classNames.bind(styles)
 function Header() {
-  
-  const [showLogin, setShowLogin] = useState(false)
-  const handleShowLogin = () => setShowLogin(true)
-  const handleCloseLogin = (e) => {
-    setShowLogin(false)
-    e.preventDefault()
-  }
-
-  const themeContext = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext)
+  const authContext = useContext(AuthContext)
+  const userContext = useContext(UserContext);
   const isLogin = useContext(UserContext).isLogin
   // MENU ITEMS
   const MENU_ITEMS = [
@@ -156,13 +148,13 @@ function Header() {
         switch (menuItem.title) {
           case 'Light Mode':
             if (themeContext.theme) {
-              themeContext.toggleTheme();
-              menuItem.icon = <FontAwesomeIcon icon={faCheck} />;
+              themeContext.toggleTheme()
+              menuItem.icon = <FontAwesomeIcon icon={faCheck} />
             }
             break
           case 'Dark Mode':
             if (!themeContext.theme) {
-              themeContext.toggleTheme();
+              themeContext.toggleTheme()
               menuItem.icon = <FontAwesomeIcon icon={faCheck} />
             }
             break
@@ -203,22 +195,17 @@ function Header() {
               <Menu items={USER_MENU} onChange={handleMenuChange}>
                 <Image
                   className={cx('avatar')}
-                  src=""
-                  alt="Le Thi Hong Nhung"
-                  fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
+                  src={userContext.currentUser.avatar}
+                  alt={userContext.currentUser.nickname}
+                  // fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
                 ></Image>
               </Menu>
             </div>
           ) : (
             <>
-              <Button primary onClick={handleShowLogin}>
+              <Button primary onClick={authContext.handleShowLogin}>
                 Login
               </Button>
-              <AuthenModal
-                showLogin={showLogin}
-                handleCloseLogin={handleCloseLogin}
-                handleShowLogin={handleShowLogin}
-              />
               <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                 <button className={cx('more-btn')}>
                   <FontAwesomeIcon icon={faEllipsisVertical} />
