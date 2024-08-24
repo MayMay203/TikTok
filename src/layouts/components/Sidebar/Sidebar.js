@@ -3,16 +3,29 @@ import classNames from 'classnames/bind';
 
 import MenuItem from './Menu/MenuItem';
 import Menu from './Menu';
-import { ExploreActiveIcon, ExploreIcon, FollowingActiveIcon, FollowingIcon, FriendActiveIcon, FriendIcon, HomeActiveIcon, HomeIcon, LiveActiveIcon, LiveIcon } from '~/components/Icon';
-import config from '~/config';
-import SuggestedAccount from '~/components/SuggestedAccount';
-import { useContext, useEffect, useState } from 'react';
-import * as suggestService from '~/services/getSuggestedUsers';
+import {
+  ExploreActiveIcon,
+  ExploreIcon,
+  FollowingActiveIcon,
+  FollowingIcon,
+  FriendActiveIcon,
+  FriendIcon,
+  HomeActiveIcon,
+  HomeIcon,
+  LiveActiveIcon,
+  LiveIcon,
+  ProfileIcon,
+} from '~/components/Icon'
+import config from '~/config'
+import SuggestedAccount from '~/components/SuggestedAccount'
+import { useContext, useEffect, useState } from 'react'
+import * as suggestService from '~/services/getSuggestedUsers'
 import images from '~/assets/images'
-import FooterList from './FooterList';
-import Button from '~/components/Button';
-import { UserContext } from '~/components/Context/UserContext';
+import FooterList from './FooterList'
+import Button from '~/components/Button'
+import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
+import userEvent from '@testing-library/user-event'
 
 const cx = classNames.bind(styles)
 const INIT_PAGE = 1
@@ -163,11 +176,17 @@ function Sidebar() {
         <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
         <MenuItem
           title="Profile"
-          to="/@maymay203"
-          avatar={{
-            src: userContext.currentUser.avatar,
-            alt: userContext.currentUser.nickname
-          }}
+          to={`/${userContext.currentUser.nickname}`}
+          {...(userContext.isLogin
+            ? {
+                avatar: {
+                  src: userContext.currentUser.avatar,
+                  alt: userContext.currentUser.nickname,
+                },
+              }
+            : {
+                icon: <ProfileIcon/>,
+              })}
         />
       </Menu>
       {isLogin && (

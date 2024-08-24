@@ -22,13 +22,15 @@ import { ThemeContext } from '~/components/Context/ThemeContext'
 import { useContext } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
+import { logout } from '~/services/logoutService'
 
 const cx = classNames.bind(styles)
 function Header() {
   const themeContext = useContext(ThemeContext)
   const authContext = useContext(AuthContext)
-  const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext)
   const isLogin = useContext(UserContext).isLogin
+
   // MENU ITEMS
   const MENU_ITEMS = [
     {
@@ -132,7 +134,7 @@ function Header() {
     {
       icon: <LogoutIcon />,
       title: 'Logout',
-      to: '/login',
+      type: 'logout',
       separate: true,
     },
   ]
@@ -143,7 +145,14 @@ function Header() {
       case 'language':
         // Handle logic
         break
-      // not Optimal
+      case 'logout':
+        const isConfirm = window.confirm('Are you sure you want to log out?')
+       if (isConfirm) {
+         localStorage.removeItem('token');
+         localStorage.removeItem('isLogin')
+         userContext.toggleLogin();
+       }
+        break
       case 'darkmode':
         switch (menuItem.title) {
           case 'Light Mode':
