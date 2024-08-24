@@ -3,15 +3,29 @@ import classNames from 'classnames/bind';
 
 import MenuItem from './Menu/MenuItem';
 import Menu from './Menu';
-import { ExploreActiveIcon, ExploreIcon, FollowingActiveIcon, FollowingIcon, FriendActiveIcon, FriendIcon, HomeActiveIcon, HomeIcon, LiveActiveIcon, LiveIcon } from '~/components/Icon';
-import config from '~/config';
-import SuggestedAccount from '~/components/SuggestedAccount';
-import { useContext, useEffect, useState } from 'react';
-import * as suggestService from '~/services/getSuggestedUsers';
+import {
+  ExploreActiveIcon,
+  ExploreIcon,
+  FollowingActiveIcon,
+  FollowingIcon,
+  FriendActiveIcon,
+  FriendIcon,
+  HomeActiveIcon,
+  HomeIcon,
+  LiveActiveIcon,
+  LiveIcon,
+  ProfileIcon,
+} from '~/components/Icon'
+import config from '~/config'
+import SuggestedAccount from '~/components/SuggestedAccount'
+import { useContext, useEffect, useState } from 'react'
+import * as suggestService from '~/services/getSuggestedUsers'
 import images from '~/assets/images'
-import FooterList from './FooterList';
-import Button from '~/components/Button';
-import { UserContext } from '~/components/Context/UserContext';
+import FooterList from './FooterList'
+import Button from '~/components/Button'
+import { UserContext } from '~/components/Context/UserContext'
+import { AuthContext } from '~/components/Modal/AuthModalContext'
+import userEvent from '@testing-library/user-event'
 
 const cx = classNames.bind(styles)
 const INIT_PAGE = 1
@@ -21,6 +35,8 @@ function Sidebar() {
   const [perPage, setPerPage] = useState(PER_PAGE)
   const [suggestedUsers, setSuggestedUsers] = useState([])
   const [isSeeMore, setIsSeeMore] = useState(false)
+  const authContext = useContext(AuthContext)
+  const userContext = useContext(UserContext)
 
   // Sidebar Footer
   const FOOTER_LIST = [
@@ -123,12 +139,12 @@ function Sidebar() {
 
   const handleViewChange = (isSeeMore) => {
     if (!isSeeMore) {
-       suggestService
-         .getSuggestedUsers({ page: INIT_PAGE, perPage: 15})
-         .then((data) => {
-           setSuggestedUsers(data)
-         })
-         .catch((error) => console.log(error))
+      suggestService
+        .getSuggestedUsers({ page: INIT_PAGE, perPage: 15 })
+        .then((data) => {
+          setSuggestedUsers(data)
+        })
+        .catch((error) => console.log(error))
     } else {
       suggestService
         .getSuggestedUsers({ page: INIT_PAGE, perPage: perPage })
@@ -137,7 +153,7 @@ function Sidebar() {
         })
         .catch((error) => console.log(error))
     }
-    setIsSeeMore(prev => !prev)
+    setIsSeeMore((prev) => !prev)
   }
 
   return (
@@ -160,11 +176,19 @@ function Sidebar() {
         <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
         <MenuItem
           title="Profile"
-          to="/@maymay203"
-          avatar={{
-            src: 'https://p16-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/7322552705711341569.jpeg?lk3s=a5d48078&nonce=99080&refresh_token=43952f4ebaf517bace44ebe415bc2000&x-expires=1724407200&x-signature=RloCzgWgyoWKp6FFSLr37yX7aVg%3D&shp=a5d48078&shcp=81f88b70',
-            alt: 'Nhung',
-          }}
+          {...(userContext.isLogin
+            ? {
+                avatar: {
+                  src: userContext.currentUser.avatar,
+                  alt: userContext.currentUser.nickname,
+                },
+              }
+            : {
+              icon: <ProfileIcon />,
+              activeIcon: <ProfileIcon />,
+              onClick: authContext.handleShowLogin,
+              className: 'd-flex',
+              })}
         />
       </Menu>
       {isLogin && (
@@ -178,7 +202,7 @@ function Sidebar() {
       {isLogin || (
         <div className={cx('login-wrapper')}>
           <p className={cx('login-desc')}>Log in to follow creators, like videos, and view comments.</p>
-          <Button outline size="large">
+          <Button outline size="large" onClick={authContext.handleShowLogin}>
             Login
           </Button>
         </div>

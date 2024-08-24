@@ -19,13 +19,16 @@ import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, Setti
 import Image from '~/components/Image'
 import config from '~/config'
 import { ThemeContext } from '~/components/Context/ThemeContext'
-import { useContext } from 'react'
+import { useContext} from 'react'
 import { UserContext } from '~/components/Context/UserContext'
-import AuthenModal from '~/components/Modal/AuthenModal'
+import { AuthContext } from '~/components/Modal/AuthModalContext'
 
 const cx = classNames.bind(styles)
+const menuItems = []
 function Header() {
-  const themeContext = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext)
+  const authContext = useContext(AuthContext)
+  const userContext = useContext(UserContext)
   const isLogin = useContext(UserContext).isLogin
   // MENU ITEMS
   const MENU_ITEMS = [
@@ -75,17 +78,14 @@ function Header() {
         data: [
           {
             type: 'darkmode',
-            title: 'Use Device Theme',
-            icon: <FontAwesomeIcon icon={faCheck} />,
-          },
-          {
-            type: 'darkmode',
             title: 'Dark Mode',
+            // icon: themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
             icon: <svg style={{ width: '24px' }}></svg>,
           },
           {
             type: 'darkmode',
             title: 'Light Mode',
+            // icon: !themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
             icon: <svg style={{ width: '24px' }}></svg>,
           },
         ],
@@ -135,7 +135,7 @@ function Header() {
     {
       icon: <LogoutIcon />,
       title: 'Logout',
-      to: '/login',
+      type: 'logout',
       separate: true,
     },
   ]
@@ -146,17 +146,35 @@ function Header() {
       case 'language':
         // Handle logic
         break
-      // not Optimal
+      case 'logout':
+        const isConfirm = window.confirm('Are you sure you want to log out?')
+       if (isConfirm) {
+         localStorage.removeItem('token');
+         localStorage.removeItem('isLogin')
+         userContext.toggleLogin();
+       }
+        break
       case 'darkmode':
         switch (menuItem.title) {
           case 'Light Mode':
+            menuItems[0] = menuItem
             if (themeContext.theme) {
               themeContext.toggleTheme()
+              menuItem.icon = <FontAwesomeIcon icon={faCheck} />
+              if (menuItems[1]) {
+                menuItems[1].icon = <svg style={{ width: '24px' }}></svg>
+              }
             }
             break
           case 'Dark Mode':
+            menuItems[1] = menuItem
             if (!themeContext.theme) {
-              themeContext.toggleTheme();
+              themeContext.toggleTheme()
+               menuItem.icon = <FontAwesomeIcon icon={faCheck} />
+              if (menuItems[0]) {
+                 
+                 menuItems[0].icon = <svg style={{ width: '24px' }}></svg>
+               }
             }
             break
           default:
@@ -168,53 +186,55 @@ function Header() {
   }
 
   return (
-      <header className={cx('wrapper')}>
-        <div className={cx('inner')}>
-          <Link to={config.routes.home} className={cx('logo-wrapper')}>
-            <Logo className={cx('logo')} />
-          </Link>
-          <Search />
-  
-          <div className={cx('actions')}>
-            {isLogin ? (
-              <div className={cx('current-user')}>
-                <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                  Upload
-                </Button>
-                <Tippy content="Message">
-                  <button className={cx('message-btn')}>
-                    <UploadIcon />
+    <header className={cx('wrapper')}>
+      <div className={cx('inner')}>
+        <Link to={config.routes.home} className={cx('logo-wrapper')}>
+          <Logo className={cx('logo')} />
+        </Link>
+        <Search />
+
+        <div className={cx('actions')}>
+          {isLogin ? (
+            <div className={cx('current-user')}>
+              <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                Upload
+              </Button>
+              <Tippy content="Message">
+                <button className={cx('message-btn')}>
+                  <UploadIcon />
+                </button>
+              </Tippy>
+              <div className={cx('inbox-wrapper')}>
+                <Tippy content="Inbox">
+                  <button className={cx('inbox-btn')}>
+                    <InboxIcon />
                   </button>
                 </Tippy>
-                <div className={cx('inbox-wrapper')}>
-                  <Tippy content="Inbox">
-                    <button className={cx('inbox-btn')}>
-                      <InboxIcon />
-                    </button>
-                  </Tippy>
-                </div>
-                <Menu items={USER_MENU} onChange={handleMenuChange}>
-                  <Image
-                    className={cx('avatar')}
-                    src=""
-                    alt="Le Thi Hong Nhung"
-                    fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
-                  ></Image>
-                </Menu>
               </div>
-            ) : (
-              <>
-                <AuthenModal/>
-                <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                  <button className={cx('more-btn')}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
-                  </button>
-                </Menu>
-              </>
-            )}
-          </div>
+              <Menu items={USER_MENU} onChange={handleMenuChange}>
+                <Image
+                  className={cx('avatar')}
+                  src={userContext.currentUser.avatar}
+                  alt={userContext.currentUser.nickname}
+                  // fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
+                ></Image>
+              </Menu>
+            </div>
+          ) : (
+            <>
+              <Button primary onClick={authContext.handleShowLogin}>
+                Login
+              </Button>
+              <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                <button className={cx('more-btn')}>
+                  <FontAwesomeIcon icon={faEllipsisVertical} />
+                </button>
+              </Menu>
+            </>
+          )}
         </div>
-      </header>
+      </div>
+    </header>
   )
 }
 

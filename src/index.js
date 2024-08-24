@@ -7,17 +7,23 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import GlobalStyles from '~/components/GlobalStyles'
 import { ThemeProvider } from './components/Context/ThemeContext';
 import {UserProvider} from './components/Context/UserContext';
+import { AuthProvider } from './components/Modal/AuthModalContext'
+import { ErrorModalProvider } from './components/Modal/ErrorModalContext';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-   <UserProvider>
-     <ThemeProvider>
-          <GlobalStyles>
-          <App />
-          </GlobalStyles>
-     </ThemeProvider>
-   </UserProvider>
+    <GlobalStyles>
+     <ErrorModalProvider>
+        <UserProvider>
+          <AuthProvider>
+            <ThemeProvider>
+              <App />
+            </ThemeProvider>
+          </AuthProvider>
+        </UserProvider>
+     </ErrorModalProvider>
+    </GlobalStyles>
   </React.StrictMode>,
 )
 

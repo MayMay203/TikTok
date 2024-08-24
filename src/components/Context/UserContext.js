@@ -1,23 +1,35 @@
 import PropTypes from 'prop-types';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react'
+import { getCurrentUser } from '~/services/getCurrentUser'
 
-const UserContext = createContext();
+const UserContext = createContext()
 
 function UserProvider({ children }) {
-    const [isLogin, setIsLogin] = useState(true)
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') === 'true')
+  const [currentUser, setCurrentUser] = useState({})
 
-    const toggleLogin = () => {
-        setIsLogin(prev => !prev);
+  useEffect(() => {
+    async function fetchApi() {
+      const data = await getCurrentUser()
+      if (data) {
+        setCurrentUser(data)
+      }
     }
+    fetchApi()
+  }, [])
 
-    const value = {
-        isLogin,
-        toggleLogin,
-    }
+  const toggleLogin = () => {
+    setIsLogin((prev) => !prev)
+  }
 
-    return (<UserContext.Provider value={value}>
-        {children}
-    </UserContext.Provider>);
+  const value = {
+    isLogin,
+    toggleLogin,
+    setCurrentUser,
+    currentUser,
+  }
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
 UserProvider.propTypes = {

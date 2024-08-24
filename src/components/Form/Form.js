@@ -3,18 +3,18 @@ import styles from './Form.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles)
-function Form({children, action, method }) {
-    return (
-        <form action={action} className={cx('form')} method={method}>
-            {children}
-        </form>
-    );
+function Form({ children, onSubmit, className}) {
+  return (
+    <form onSubmit={onSubmit} className={cx('form',{[className]:className})}>
+      {children}
+    </form>
+  )
 }
 
 Form.propTypes = {
-    children: PropTypes.node.isRequired,
-    action: PropTypes.string.isRequired, 
-    method: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  onSubmit: PropTypes.func,
+  method: PropTypes.string,
 }
 
 export default Form;
