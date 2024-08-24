@@ -507,3 +507,4 @@ export const ProfileIcon = ({ width = '2.4rem', height = '2.4rem', className }) 
     ></path>
   </svg>
 )
+

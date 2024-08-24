@@ -19,7 +19,7 @@ import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, Setti
 import Image from '~/components/Image'
 import config from '~/config'
 import { ThemeContext } from '~/components/Context/ThemeContext'
-import { useContext, useState } from 'react'
+import { useContext} from 'react'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
 
@@ -79,12 +79,14 @@ function Header() {
           {
             type: 'darkmode',
             title: 'Dark Mode',
-            icon: themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
+            // icon: themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
+            icon: <svg style={{ width: '24px' }}></svg>,
           },
           {
             type: 'darkmode',
             title: 'Light Mode',
-            icon: !themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
+            // icon: !themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
+            icon: <svg style={{ width: '24px' }}></svg>,
           },
         ],
       },

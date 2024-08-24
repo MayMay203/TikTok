@@ -176,7 +176,6 @@ function Sidebar() {
         <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
         <MenuItem
           title="Profile"
-          to={`/${userContext.currentUser.nickname}`}
           {...(userContext.isLogin
             ? {
                 avatar: {
@@ -185,7 +184,10 @@ function Sidebar() {
                 },
               }
             : {
-                icon: <ProfileIcon/>,
+              icon: <ProfileIcon />,
+              activeIcon: <ProfileIcon />,
+              onClick: authContext.handleShowLogin,
+              className: 'd-flex',
               })}
         />
       </Menu>
