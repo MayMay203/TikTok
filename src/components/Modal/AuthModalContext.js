@@ -34,29 +34,29 @@ function AuthProvider({ children }) {
   }, [email, password])
 
   useEffect(() => {
-    setIsConfirm(password === confirmPass)
+      setIsConfirm(password === confirmPass)
   }, [confirmPass, , password])
 
   const handleShowSignUp = () => setShowSignUp(true)
-  const handleCloseSignUp = (event) => {
+  const handleShowLogin = () => setShowLogin(true)
+
+  const handleCloseSignUp = () => {
     setShowSignUp(false)
     setEmail('')
     setPassword('')
-    event.preventDefault()
   }
-  const handleShowLogin = () => setShowLogin(true)
-  const handleCloseLogin = (event) => {
+
+  const handleCloseLogin = () => {
     setShowLogin(false)
     setEmail('')
     setPassword('')
-    event.preventDefault()
   }
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const res = await login(email, password)
     if (res) {
-      handleCloseLogin(e)
+      handleCloseLogin()
       userContext.toggleLogin()
       localStorage.setItem('token', res.meta.token)
       localStorage.setItem('isLogin', true)
@@ -69,14 +69,13 @@ function AuthProvider({ children }) {
     }
   }
 
-  const handleSignUp = async (e) => {
-    e.preventDefault()
+  const handleSignUp = async () => {
     const data = await register(email, password)
     if (data) {
-      handleCloseSignUp(e)
+      handleCloseSignUp()
       setEmail('')
       setPassword('')
-      handleShowLogin(e)
+      handleShowLogin()
       console.log('Signup successfully', data)
       errorModalContext.setIsShow(true)
       errorModalContext.setTitle('Done')
@@ -100,7 +99,7 @@ function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={value}>
       {/* Login modal */}
-      <Modal show={showLogin} onHide={handleShowLogin} size="md" centered>
+      <Modal show={showLogin} onHide={handleCloseLogin} size="md" centered>
         <Modal.Header className={cx('custom-background', 'custom-border-bg')}>
           <h2 className={cx('modal-title')}>Log in to TikTok</h2>
           <Button className={cx('btn-close')} size="small" onClick={handleCloseLogin}>
@@ -131,9 +130,10 @@ function AuthProvider({ children }) {
             <div className="d-flex mt-4 justify-content-center gap-2">
               <p className={cx('text')}>Don't have an account?</p>
               <button
+                type='button'
                 className={cx('link')}
-                onClick={(e) => {
-                  handleCloseLogin(e)
+                onClick={() => {
+                  handleCloseLogin()
                   handleShowSignUp()
                 }}
               >
@@ -142,14 +142,13 @@ function AuthProvider({ children }) {
             </div>
             <div className="d-flex mt-5 justify-content-end gap-3">
               <Button
+                type="button"
                 outline
-                onClick={(e) => {
-                  handleCloseLogin(e)
-                }}
+                onClick={ handleCloseLogin}
               >
                 Close
               </Button>
-              <Button primary onClick={handleLogin} disabled={!isFormValid}>
+              <Button type='submit' primary onClick={handleLogin} disabled={!isFormValid}>
                 Login
               </Button>
             </div>
@@ -200,8 +199,8 @@ function AuthProvider({ children }) {
               <p className={cx('text')}>Already have an account?</p>
               <button
                 className={cx('link')}
-                onClick={(e) => {
-                  handleCloseSignUp(e)
+                onClick={() => {
+                  handleCloseSignUp()
                   handleShowLogin()
                 }}
               >
@@ -210,14 +209,13 @@ function AuthProvider({ children }) {
             </div>
             <div className="d-flex mt-5 justify-content-end gap-3">
               <Button
+                type="button"
                 outline
-                onClick={(e) => {
-                  handleCloseSignUp(e)
-                }}
+                onClick={handleCloseSignUp}
               >
                 Close
               </Button>
-              <Button primary className={cx('submit-btn')} disabled={!isFormValid || !isConfirm}>
+              <Button type='submit' primary className={cx('submit-btn')} disabled={!isFormValid || !isConfirm}>
                 Sign Up
               </Button>
             </div>
