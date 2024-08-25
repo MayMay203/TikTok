@@ -1,20 +1,28 @@
 import styles from './Profile.module.scss'
 import classNames from 'classnames/bind'
-import { UserContext } from '~/components/Context/UserContext'
-import { useContext} from 'react'
+import {useEffect, useState } from 'react'
 import Image from '~/components/Image'
 import Button from '~/components/Button'
 import { SettingIcon, ShareIcon } from '~/components/Icon'
 import { LockIcon } from '~/components/Icon/Icon'
 import TabList from '~/components/TabList'
+import { getAnUser } from '~/services/getAnUser'
+import { useParams } from 'react-router-dom'
 
+const tablist = ['Videos', 'Favotites', 'Liked']
 const cx = classNames.bind(styles)
 function Profile() {
-  const userContext = useContext(UserContext)
-  const { first_name, last_name, bio, followers_count, followings_count, likes_count, nickname, avatar } =
-    userContext.currentUser
-  const tablist = ['Videos', 'Favotites', 'Liked']
+  const [dataUser, setDataUser] = useState({})
+  const { nickname } = useParams()
+  const { first_name, last_name, bio, followers_count, followings_count, likes_count, avatar } = dataUser
 
+  useEffect(() => {
+    async function fetchApi() {
+      const data = await getAnUser(nickname)
+      setDataUser(data)
+    }
+    fetchApi()
+  }, [nickname])
   return (
     <div className={cx('wrapper')}>
       <div className={cx('info-wrapper')}>
@@ -56,7 +64,7 @@ function Profile() {
         <div className={cx('control')}>
           <button className={cx('control-btn')}>Latest</button>
           <button className={cx('control-btn')}>Popular</button>
-          <button className={cx('control-btn',{active:true})}>Oldest</button>
+          <button className={cx('control-btn', { active: true })}>Oldest</button>
         </div>
       </TabList>
     </div>
