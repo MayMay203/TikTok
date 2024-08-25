@@ -508,3 +508,34 @@ export const ProfileIcon = ({ width = '2.4rem', height = '2.4rem', className }) 
   </svg>
 )
 
+export const ShareIcon = ({ width = '1.9rem', height = '1.9rem', className }) => (
+  <svg
+    className={className}
+    width={width}
+    height={height}
+    fill="currentColor"
+    color="inherit"
+    fontSize="inherit"
+    viewBox="0 0 48 48"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M21.68 3.18a2 2 0 0 1 2.14.32l21.5 19a2 2 0 0 1-.02 3.02l-21.5 18.5a2 2 0 0 1-3.3-1.52v-9.97c-5.68.28-11.95 1.75-16.09 5.88A2 2 0 0 1 1 37c0-11.68 7.7-21.05 19.5-21.94V5a2 2 0 0 1 1.18-1.82ZM24.5 30.5v7.64l16.46-14.16L24.5 9.44V17a2 2 0 0 1-2.05 2c-8.4-.21-15.62 5.34-17.09 13.66 4.47-2.7 9.8-3.87 14.98-4.13.68-.03 1.22-.04 1.6-.04 1.19 0 2.56.26 2.56 2.01Z"></path>
+  </svg>
+)
+
+export const LockIcon = ({ width = '1.8rem', height = '1.8rem', className }) => (
+  <svg
+    className={className}
+    width={width}
+    height={height}
+    viewBox="0 0 48 48"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M24 3C17.9249 3 13 7.92487 13 14V21H8C6.89543 21 6 21.8954 6 23V41C6 42.1046 6.89543 43 8 43H40C41.1046 43 42 42.1046 42 41V23C42 21.8954 41.1046 21 40 21H35V14C35 7.92487 30.0751 3 24 3ZM31 21V14C31 10.134 27.866 7 24 7C20.134 7 17 10.134 17 14V21H31Z"
+    ></path>
+  </svg>
+)

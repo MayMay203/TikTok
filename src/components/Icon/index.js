@@ -23,5 +23,6 @@ export {
   FriendActiveIcon,
   LiveActiveIcon,
   ExploreActiveIcon,
-  ProfileIcon
+  ProfileIcon,
+  ShareIcon,
 } from './Icon'

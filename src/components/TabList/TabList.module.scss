@@ -1,0 +1,36 @@
+// Tab
+.tab-wrapper{
+    margin: 20px 24px 0 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab{
+    position: relative;
+    display: flex;
+}
+
+.tab-item{
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    height: 44px;
+    padding: 0 32px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #73747b;
+    cursor: pointer;
+}
+
+.tab-line{
+    bottom: 0;
+    position: absolute;
+    height: 2px;
+    background-color: var(--text-color);
+    transition: all .4s;
+}
+
+.selected{
+    color: var(--text-color);
+}
