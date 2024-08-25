@@ -8,7 +8,11 @@ function FormInput({ id, title, error, show = false, className, ...props }) {
       <label className={cx('form-label')} htmlFor={id}>
         {title}
       </label>
-      <input id={id} className={cx('form-input')} {...props} required></input>
+      <input id={id} className={cx('form-input')} {...props} required onKeyDown={(e) => {
+        if (e.key === 'Enter' && e.target.type !== 'submit') {
+          e.preventDefault()
+        }
+      }}></input>
       <p
         className={cx('form-error', {
           show,

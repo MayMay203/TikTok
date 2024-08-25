@@ -182,12 +182,13 @@ function Sidebar() {
                   src: userContext.currentUser.avatar,
                   alt: userContext.currentUser.nickname,
                 },
+                to: `/@${userContext.currentUser.nickname}`,
               }
             : {
-              icon: <ProfileIcon />,
-              activeIcon: <ProfileIcon />,
-              onClick: authContext.handleShowLogin,
-              className: 'd-flex',
+                icon: <ProfileIcon />,
+                activeIcon: <ProfileIcon />,
+                onClick: authContext.handleShowLogin,
+                className: 'd-flex',
               })}
         />
       </Menu>
