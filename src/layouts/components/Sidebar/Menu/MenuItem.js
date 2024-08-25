@@ -6,7 +6,6 @@ import Image from '~/components/Image'
 
 const cx = classNames.bind(styles)
 function MenuItem({ title, to, icon, activeIcon, avatar, onClick, className }) {
-  console.log(className)
   const hasAvatar = !!avatar
   return (
     <NavLink
