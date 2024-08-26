@@ -8,7 +8,7 @@ import { LockBigIcon } from '../Icon'
 const cx = classNames.bind(styles)
 function TabList({ icon, className, tablist = [], dataVideo = [], dataLikedVideo = [], children, nickname }) {
   const [selectedTab, setSelectedTab] = useState(0)
-  const [selectedCtl, setSelectedCtl] = useState(0)
+  const [selectedCtl, setSelectedCtl] = useState('0')
 
   const tabRefs = useState([])
   const lineRef = useRef()

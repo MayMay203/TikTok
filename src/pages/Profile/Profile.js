@@ -23,7 +23,7 @@ function Profile() {
       setDataUser(data)
     }
     fetchApi()
-  }, [nickname])
+  }, [dataUser])
 
   // Get user's videos
   useEffect(() => {

@@ -46,6 +46,9 @@
     padding: 8px 10px;
     border-radius: 6px;
     color: var(--text-color);
+    margin-left: 0;
+    font-weight: 600;
+    height: 40px;
 
     &:hover{
         background-color: var(--btn-hover-bg);
@@ -76,4 +79,8 @@
 
 .bio{
     line-height: 1.3125;
+}
+
+.custom-height{
+    height: 40px;
 }

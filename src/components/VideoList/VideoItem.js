@@ -4,12 +4,12 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 const cx = classNames.bind(styles)
 function VideoItem({ data }) {
-  const handlePlay = (e) => {
-    e.target.play()
+  const handlePlay = async(e) => {
+    await e.target.play()
   }
 
-  const handlePause = (e) => {
-    e.target.pause()
+  const handlePause = async(e) => {
+    await e.target.pause()
   }
   return (
     <div className="col">
