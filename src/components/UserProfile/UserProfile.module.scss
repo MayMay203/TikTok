@@ -64,6 +64,10 @@
     cursor: pointer;
 }
 
+.custom-number{
+    cursor: initial;
+}
+
 .value{
     font-weight: 700;
 }
@@ -74,6 +78,12 @@
 
     &:hover{
         text-decoration: underline;
+    }
+}
+
+.custom-unit{
+    &:hover{
+        text-decoration: none;
     }
 }
 

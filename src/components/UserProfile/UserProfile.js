@@ -9,6 +9,7 @@ import { FollowedIcon, MoreIcon, SettingIcon, ShareIcon } from '../Icon'
 import { UserContext } from '../Context/UserContext'
 import { followUser } from '~/services/followService'
 import { unFollowUser } from '~/services/unFollowService'
+import { getFollowingList } from '~/services/getFollowingList'
 
 const cx = classNames.bind(styles)
 function UserProfile({ dataUser }) {
@@ -40,6 +41,11 @@ function UserProfile({ dataUser }) {
     if (data) {
       setIsFollowing(data.is_followed)
     }
+  }
+
+  const handleGetFollowingList = async () => {
+    const data = await getFollowingList(1);
+    console.log(data)
   }
   return (
     <div className={cx('wrapper')}>
@@ -87,7 +93,7 @@ function UserProfile({ dataUser }) {
           )}
         </div>
         <div className={cx('interaction')}>
-          <div className={cx('number')}>
+          <div className={cx('number')} onClick={handleGetFollowingList}>
             <strong className={cx('value')}>{followings_count ? followings_count : 0}</strong>
             <span className={cx('unit')}>Following</span>
           </div>
@@ -95,9 +101,9 @@ function UserProfile({ dataUser }) {
             <strong className={cx('value')}>{followers_count ? followers_count : 0}</strong>
             <span className={cx('unit')}>Followers</span>
           </div>
-          <div className={cx('number')}>
+          <div className={cx('number','custom-number')}>
             <strong className={cx('value')}>{likes_count}</strong>
-            <span className={cx('unit')}>Likes</span>
+            <span className={cx('unit','custom-unit')}>Likes</span>
           </div>
         </div>
         <p className={cx('bio')}>{bio ? bio : 'No bio yet.'}</p>
