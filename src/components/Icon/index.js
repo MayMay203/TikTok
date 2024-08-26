@@ -28,5 +28,11 @@ export {
   PlayIcon,
   LockBigIcon,
   MoreIcon,
-  FollowedIcon
+  FollowedIcon,
+  MusicIcon,
+  PlayVideoIcon,
+  PauseIcon,
+  NoVolumeIcon,
+  VolumeIcon,
+  ArrowUpIcon,
 } from './Icon'
