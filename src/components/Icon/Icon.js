@@ -573,3 +573,33 @@ export const LockBigIcon = ({ width = '9rem', height = '9rem', className }) => (
     ></path>
   </svg>
 )
+
+export const MoreIcon = ({ width = '1.9rem', height = '1.9rem', className }) => (
+  <svg
+    className={className}
+    width={width}
+    height={height}
+    fill="currentColor"
+    color="inherit"
+    font-size="inherit"
+    viewBox="0 0 48 48"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M5 24a4 4 0 1 1 8 0 4 4 0 0 1-8 0Zm15 0a4 4 0 1 1 8 0 4 4 0 0 1-8 0Zm15 0a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z"></path>
+  </svg>
+)
+
+export const FollowedIcon = ({ width = '1.9rem', height = '1.9rem', className }) => (
+  <svg
+    className={className}
+    width={width}
+    height={height}
+    fill="currentColor"
+    color="inherit"
+    font-size="inherit"
+    viewBox="0 0 48 48"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M18.98 4a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 4A6 6 0 1 0 19 20.01a6 6 0 0 0 0-12.01ZM18.98 27c4.11 0 7.6 1.12 10.32 3.1l-2.92 2.83a13.7 13.7 0 0 0-7.4-1.93C10.9 31 6.3 36.16 6 44c-.02.55-.46 1-1.02 1h-2c-.55 0-1-.45-.98-1 .33-10.01 6.7-17 16.98-17ZM45.83 29.53l-1.69-1.06a1 1 0 0 0-1.38.32l-8.04 12.87-4.57-5.22a1 1 0 0 0-1.41-.1l-1.51 1.32a1 1 0 0 0-.09 1.41l6.34 7.25a1.99 1.99 0 0 0 3.2-.26l9.47-15.15a1 1 0 0 0-.32-1.38Z"></path>
+  </svg>
+)

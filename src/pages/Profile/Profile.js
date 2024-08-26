@@ -3,13 +3,13 @@ import classNames from 'classnames/bind'
 import {useEffect, useState } from 'react'
 import { LockIcon } from '~/components/Icon/Icon'
 import TabList from '~/components/TabList'
-import { getAnUser } from '~/services/getAnUser'
+import { getAUser } from '~/services/getAUser'
 import { useParams } from 'react-router-dom'
 import UserProfile from '~/components/UserProfile'
 import { getUserLikedVideos } from '~/services/getUserLikedVideos'
 import { getUserVideos } from '~/services/getUserVideos'
 
-const tablist = ['Videos', 'Favotites', 'Liked']
+const tablist = ['Videos', 'Favorites', 'Liked']
 const cx = classNames.bind(styles)
 function Profile() {
   const [dataUser, setDataUser] = useState({})
@@ -19,11 +19,11 @@ function Profile() {
   // Get user data
   useEffect(() => {
     async function fetchApi() {
-      const data = await getAnUser(nickname)
+      const data = await getAUser(nickname)
       setDataUser(data)
     }
     fetchApi()
-  }, [nickname])
+  }, [dataUser])
 
   // Get user's videos
   useEffect(() => {

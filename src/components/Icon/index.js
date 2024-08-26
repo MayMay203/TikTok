@@ -26,5 +26,7 @@ export {
   ProfileIcon,
   ShareIcon,
   PlayIcon,
-  LockBigIcon
+  LockBigIcon,
+  MoreIcon,
+  FollowedIcon
 } from './Icon'
