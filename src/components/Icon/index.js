@@ -23,5 +23,8 @@ export {
   FriendActiveIcon,
   LiveActiveIcon,
   ExploreActiveIcon,
-  ProfileIcon
+  ProfileIcon,
+  ShareIcon,
+  PlayIcon,
+  LockBigIcon
 } from './Icon'

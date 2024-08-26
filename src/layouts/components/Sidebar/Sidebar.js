@@ -25,7 +25,6 @@ import FooterList from './FooterList'
 import Button from '~/components/Button'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
-import userEvent from '@testing-library/user-event'
 
 const cx = classNames.bind(styles)
 const INIT_PAGE = 1
@@ -135,7 +134,7 @@ function Sidebar() {
       setSuggestedUsers(data)
     }
     fetchApi()
-  }, [])
+  }, [perPage])
 
   const handleViewChange = (isSeeMore) => {
     if (!isSeeMore) {
