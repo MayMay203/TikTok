@@ -2,11 +2,14 @@ import styles from './TabList.module.scss'
 import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
 import { memo, useEffect, useRef, useState } from 'react'
+import VideoList from '../VideoList'
+import { LockBigIcon } from '../Icon'
 
 const cx = classNames.bind(styles)
-function TabList({ icon, className, tablist = [], children, hasVideo }) {
+function TabList({ icon, className, tablist = [], dataVideo = [], dataLikedVideo = [], children, nickname }) {
   const [selectedTab, setSelectedTab] = useState(0)
-  const [type, setType] = useState(tablist[0])
+  const [selectedCtl, setSelectedCtl] = useState(0)
+
   const tabRefs = useState([])
   const lineRef = useRef()
 
@@ -22,9 +25,17 @@ function TabList({ icon, className, tablist = [], children, hasVideo }) {
     lineRef.current.style.left = `${tabItemRect.left - 264}px`
   }
 
+  const handleLeaveTab = () => {
+    const tabItemRect = tabRefs[selectedTab].getBoundingClientRect()
+    lineRef.current.style.width = `${tabItemRect.width}px`
+    lineRef.current.style.left = `${tabItemRect.left - 264}px`
+  }
+
   const handleClickTab = (index) => {
     setSelectedTab(index)
-    setType(tablist[index])
+    const tabItemRect = tabRefs[index].getBoundingClientRect()
+    lineRef.current.style.width = `${tabItemRect.width}px`
+    lineRef.current.style.left = `${tabItemRect.left - 264}px`
   }
 
   return (
@@ -37,6 +48,7 @@ function TabList({ icon, className, tablist = [], children, hasVideo }) {
               key={index}
               className={cx('tab-item', { selected: selectedTab === index })}
               onMouseEnter={handleHoverTab}
+              onMouseLeave={handleLeaveTab}
               onClick={() => handleClickTab(index)}
             >
               {index === 0 ? undefined : icon}
@@ -45,8 +57,49 @@ function TabList({ icon, className, tablist = [], children, hasVideo }) {
           ))}
           <div ref={lineRef} className={cx('tab-line')}></div>
         </div>
-        {children}
+
+        {/* Controls */}
+        {selectedTab === 0 ? (
+          <div className={cx('control')}>
+            <button
+              data-index={0}
+              className={cx('control-btn', { active: selectedCtl === '0' })}
+              onClick={(e) => setSelectedCtl(e.target.dataset.index)}
+            >
+              Latest
+            </button>
+            <button
+              data-index={1}
+              className={cx('control-btn', { active: selectedCtl === '1' })}
+              onClick={(e) => {
+                setSelectedCtl(e.target.dataset.index)
+              }}
+            >
+              Popular
+            </button>
+            <button
+              data-index={2}
+              className={cx('control-btn', { active: selectedCtl === '2' })}
+              onClick={(e) => setSelectedCtl(e.target.dataset.index)}
+            >
+              Oldest
+            </button>
+          </div>
+        ) : undefined}
       </div>
+      {selectedTab === 0 ? (
+        dataVideo && <VideoList dataVideo={dataVideo} />
+      ) : selectedTab === 2 ? (
+        dataLikedVideo && <VideoList dataVideo={dataLikedVideo} />
+      ) : (
+        <div className={cx('private-wrapper')}>
+          <LockBigIcon />
+          <p className={cx('private-title')}>This user's liked videos are private</p>
+          <p className={cx('private-desc')}>
+            Videos liked by <strong>{nickname}</strong> are currently hidden
+          </p>
+        </div>
+      )}
     </div>
   )
 }
@@ -56,7 +109,8 @@ TabList.propTypes = {
   icon: PropTypes.node,
   classNames: PropTypes.string,
   tablist: PropTypes.array.isRequired,
-  hasVideo: PropTypes.bool,
+  dataVideo: PropTypes.array,
+  nickname: PropTypes.string,
 }
 
 export default memo(TabList)

@@ -25,4 +25,6 @@ export {
   ExploreActiveIcon,
   ProfileIcon,
   ShareIcon,
+  PlayIcon,
+  LockBigIcon
 } from './Icon'

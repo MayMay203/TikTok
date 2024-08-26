@@ -1,0 +1,79 @@
+// Info
+.wrapper{
+    display: flex;
+    column-gap: 28px;
+    align-items: center;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+
+.avatar-wrapper{
+    width: 212px;
+    height: 212px;
+}
+
+.avatar{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.username,
+.actions{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+}
+
+.nickname{
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.fullname{
+    font-size: 1.8rem;
+    line-height: 1.333;
+    font-weight: 600;
+}
+
+.btn{
+    background-color: var(--btn-bg);
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: var(--text-color);
+
+    &:hover{
+        background-color: var(--btn-hover-bg);
+    }
+}
+
+.interaction{
+    display: flex;
+    column-gap: 24px;
+}
+
+.number{
+    cursor: pointer;
+}
+
+.value{
+    font-weight: 700;
+}
+
+.unit{
+    margin-left: 6px;
+    color: var(--unit-color);
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.bio{
+    line-height: 1.3125;
+}
