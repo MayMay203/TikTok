@@ -21,10 +21,13 @@ function VideoItem({ data }) {
           onMouseOver={handlePlay}
           onMouseOut={handlePause}
           muted
+          loop
         ></video>
         <div className={cx('interact')}>
           <PlayIcon />
-          <p className={cx('number')}>{`${data.likes_count + data.comments_count + data.shares_count}`}</p>
+          <p className={cx('number')}>{`${
+            data.likes_count + data.comments_count + data.shares_count + data.views_count
+          }`}</p>
         </div>
       </div>
       <p className={cx('title')}>{data.description.substring(0, 15)}</p>

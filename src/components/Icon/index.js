@@ -28,5 +28,16 @@ export {
   PlayIcon,
   LockBigIcon,
   MoreIcon,
-  FollowedIcon
+  FollowedIcon,
+  MusicIcon,
+  PlayVideoIcon,
+  PauseIcon,
+  NoVolumeIcon,
+  VolumeIcon,
+  ArrowUpIcon,
+  HeartIcon,
+  AddIcon,
+  CommentIcon,
+  ShareVideoIcon,
+  FavoriteIcon,
 } from './Icon'

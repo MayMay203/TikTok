@@ -60,6 +60,15 @@
     }
 }
 
+.circle{
+    min-width: 48px;
+    min-height: 48px;
+    background-color: var(--btn-circle-bg);
+    border-radius: 50%;
+    color: var(--text-color);
+    padding: 0;
+}
+
 .primary{
     background-color: var(--primary-color);
     color: #fff;
