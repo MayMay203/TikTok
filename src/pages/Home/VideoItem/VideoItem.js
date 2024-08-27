@@ -8,8 +8,8 @@ import Button from '~/components/Button'
 import { MusicIcon, NoVolumeIcon, PauseIcon, PlayVideoIcon, VolumeIcon } from '~/components/Icon/Icon'
 
 const cx = classNames.bind(styles)
-function VideoItem({ data, handleMute, handleUnmute, muted}) {
-
+const defaultFn = () => {}
+function VideoItem({ data, handleMute = defaultFn, handleUnmute = defaultFn, muted, handleVolume = defaultFn, volume}) {
   const videoRef = useRef(null)
   const playRef = useRef(null)
   const pauseRef = useRef(null)
@@ -47,18 +47,31 @@ function VideoItem({ data, handleMute, handleUnmute, muted}) {
     }
   }, [])
 
+  const handleEnded = () => {
+    playRef.current.style.display = 'block'
+    pauseRef.current.style.display = 'none'
+  }
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
-        <video ref={videoRef} src={file_url} poster={thumb_url} className={cx('video')} muted={muted === true}></video>
+        <video
+          ref={videoRef}
+          src={file_url}
+          poster={thumb_url}
+          className={cx('video')}
+          muted={muted}
+          onEnded={handleEnded}
+          volume = {volume}
+        ></video>
         <div className={cx('control')}>
           <button
             ref={playRef}
             className={cx('play-btn')}
             onClick={() => {
-                videoRef.current.play()
-                pauseRef.current.style.display = 'block'
-                playRef.current.style.display = 'none'
+              videoRef.current.play()
+              pauseRef.current.style.display = 'block'
+              playRef.current.style.display = 'none'
             }}
           >
             <PlayVideoIcon className={cx('custom-icon')} />
@@ -75,9 +88,17 @@ function VideoItem({ data, handleMute, handleUnmute, muted}) {
             <PauseIcon className={cx('custom-icon')} />
           </button>
           <div className={cx('volume')}>
-            <div>
-              <input type="range" min={0} max={100} step={1} className={cx('input-volume')} />
-            </div>
+            {!muted && (
+              <input
+                value={volume}
+                type="range"
+                min={0}
+                max={1}
+                step={0.01}
+                className={cx('input-volume')}
+                onChange={(e) => handleVolume(e.target.value, videoRef)}
+              />
+            )}
             {muted || (
               <button className={cx('volume-btn')} onClick={handleMute}>
                 <VolumeIcon className={cx('custom-icon')} />
@@ -117,6 +138,10 @@ function VideoItem({ data, handleMute, handleUnmute, muted}) {
 
 VideoItem.propTypes = {
   data: PropTypes.object.isRequired,
+  handleMute: PropTypes.func.isRequired,
+  handleUnmute: PropTypes.func.isRequired,
+  muted: PropTypes.bool.isRequired,
+  handleVolume: PropTypes.func.isRequired,
 }
 
 export default VideoItem

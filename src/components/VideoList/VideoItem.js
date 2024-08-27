@@ -21,6 +21,7 @@ function VideoItem({ data }) {
           onMouseOver={handlePlay}
           onMouseOut={handlePause}
           muted
+          loop
         ></video>
         <div className={cx('interact')}>
           <PlayIcon />

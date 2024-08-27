@@ -3,15 +3,32 @@ import VideoItem from './VideoItem'
 import {useState } from 'react'
 
 function VideoList({data}) {
-  const [muted, setMuted] = useState(true)
+  const [volume, setVolume] = useState(0)
+
   const handleMute = () => {
-    setMuted(true)
+    setVolume(0)
   }
 
   const handleUnmute = () => {
-    setMuted(false)
+    setVolume(0.4)
   }
-  return data.map((item) => <VideoItem key={item.id} data={item} handleMute={handleMute} handleUnmute={handleUnmute} muted={muted}/>)
+
+  const handleVolume = (newVolume, videoRef) => {
+    videoRef.current.volume = newVolume
+    setVolume(newVolume)
+  }
+
+  return data.map((item, index) => (
+    <VideoItem
+      key={index}
+      data={item}
+      handleMute={handleMute}
+      handleUnmute={handleUnmute}
+      muted={volume === 0}
+      handleVolume={handleVolume}
+      volume = {volume}
+    />
+  ))
 }
 
 VideoList.propTypes = {
