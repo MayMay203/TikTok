@@ -1,11 +1,10 @@
 import styles from './VideoItem.module.scss'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
-import Image from '~/components/Image'
-import Button from '~/components/Button'
 import { MusicIcon, NoVolumeIcon, PauseIcon, PlayVideoIcon, VolumeIcon } from '~/components/Icon/Icon'
+import ButtonList from '../ButtonList'
 
 const cx = classNames.bind(styles)
 const defaultFn = () => {}
@@ -124,14 +123,7 @@ function VideoItem({ data, handleMute = defaultFn, handleUnmute = defaultFn, mut
           )}
         </div>
       </div>
-      {/* <div className={cx('actions')}> */}
-      {/* <div className={cx('post-user')}>
-                    <Link to={`/@${nickname}`}>
-                        <Image src={avatar} alt={nickname} />
-                    </Link>
-                    <Button circle></Button>
-               </div> */}
-      {/* </div> */}
+      <ButtonList data={data} />
     </div>
   )
 }

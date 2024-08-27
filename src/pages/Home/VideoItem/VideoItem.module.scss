@@ -1,4 +1,7 @@
 .wrapper{
+    display: flex;
+    column-gap: 28px;
+    align-items: flex-end;
     max-width: 692px;
     height: calc(120vh);
     padding: 20px 0px;
@@ -16,10 +19,6 @@
     height: 100%;
     cursor: pointer;
     object-fit: cover;
-}
-
-.info{
-
 }
 
 .control{

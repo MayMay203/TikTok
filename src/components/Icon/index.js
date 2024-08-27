@@ -35,4 +35,9 @@ export {
   NoVolumeIcon,
   VolumeIcon,
   ArrowUpIcon,
+  HeartIcon,
+  AddIcon,
+  CommentIcon,
+  ShareVideoIcon,
+  FavoriteIcon,
 } from './Icon'
