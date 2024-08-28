@@ -2,9 +2,18 @@
     display: flex;
 }
 
+.right{
+    position: relative;
+}
+
+.container{
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
 .content{
     flex: 1;
-    padding: 24px 40px 0 20px;
+    padding: 24px 20px 0 20px;
     background-color: var(--info-bg);
 }
 
@@ -156,31 +165,70 @@
 .comments{
     background-color: var(--user-block-bg);
     border-top: 1px solid var(--border-color);
-    padding: 20px 40px 0 20px;
-    min-height: 100vh;
+    padding: 20px 20px 0 20px;  
+    min-height: 50vh;  
 }
 
 .write-comment{
-    margin: 0 30px;
-    padding: 21px 0;
+    border-top: 1.5px solid var(--border-color);
+    padding: 21px 30px;
     display: flex;
     align-items: center;
     background-color: #fff;
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
     right: 0;
 }
 
-.comment-area{
+.comment-input{
     border: 1px solid transparent;
     cursor: text;
     padding: 0px 9px;
     border-radius: 8px;
     font-size: 1.4rem;
     line-height: 17px;
+    height: 40px;
+    background-color: var(--input-bg);
+    flex: 1;
+    caret-color: var(--primary-color);
 
     &:focus{
         border-color: var(--border-color);
+    }
+
+    &:not(:placeholder-shown) ~ .post-btn{
+        color: var(--primary-color);
+    }
+
+    &::placeholder{
+        color: var(--input-color);
+    }
+}
+
+.post-btn{
+    color: var(--post-color);
+    padding: 4px 4px 4px 10px;
+    font-weight: 600;
+}
+
+.scroll-top-btn{
+    display: none;
+    position: fixed;
+    background-color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    right: 50px;
+    bottom: 120px;
+    border-radius: 50%;
+    opacity: 0.9;
+    transition: .5s ease;
+
+    &:hover{
+        opacity: 1;
+    }
+
+    &:hover .arrow-icon{
+        scale: 1.1;
     }
 }

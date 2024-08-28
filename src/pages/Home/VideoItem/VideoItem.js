@@ -66,9 +66,7 @@ function VideoItem({ data, handleMute = defaultFn, handleUnmute = defaultFn, mut
           onClick={() => {
             navigate(`/@${data.user.nickname}/video/${data.uuid}`, {
               state: {
-                uuidList,
-                currentIndex: index,
-                data,
+                uuid: data.uuid
               }
             })
           }}

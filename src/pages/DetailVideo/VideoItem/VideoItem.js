@@ -12,7 +12,7 @@ function VideoItem({ data, muted }) {
   return (
     <div className={cx('wrapper')}>
       <video ref={videoRef} src={file_url} poster={thumb_url} className={cx('video')} muted={muted}></video>
-      <Button circle className={cx('close-btn')}>
+      {/* <Button circle className={cx('close-btn')}>
         <CloseIcon />
       </Button>
       {muted || (
@@ -24,7 +24,7 @@ function VideoItem({ data, muted }) {
         <Button circle className={cx('novolume-btn')}>
           <NoVolumeIcon />
         </Button>
-      )}
+      )} */}
     </div>
   )
 }
