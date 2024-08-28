@@ -5,7 +5,8 @@ const routes = {
     upload: '/upload',
     live: '/live',
     friends: '/friends',
-    explore: '/explore'
+    explore: '/explore',
+    detailVideo: '/:nickname/video/:uuid'
 }
 
 export default routes;

@@ -30,7 +30,25 @@
 }
 
 .number{
-    text-align: center;
     color: var(--number-color);
     font-weight: 700;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dnone{
+    display: none;
+}
+
+.gap{
+    margin-left: 12px;
+}
+
+.small{
+    min-width: 40px!important;
+    min-height: 40px!important;
 }
