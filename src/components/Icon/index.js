@@ -40,4 +40,13 @@ export {
   CommentIcon,
   ShareVideoIcon,
   FavoriteIcon,
+  LikedIcon,
+  CloseIcon,
+  MusicColorIcon,
+  ReportIcon, 
+  PhoneIcon, 
+  FacebookIcon, 
+  EmbedIcon, 
+  SendIcon,
+  HeartCommentIcon
 } from './Icon'

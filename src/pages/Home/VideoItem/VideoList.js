@@ -4,6 +4,7 @@ import {useState } from 'react'
 
 function VideoList({data}) {
   const [volume, setVolume] = useState(0)
+  const uuidList = data.map(video => video.uuid)
 
   const handleMute = () => {
     setVolume(0)
@@ -26,7 +27,9 @@ function VideoList({data}) {
       handleUnmute={handleUnmute}
       muted={volume === 0}
       handleVolume={handleVolume}
-      volume = {volume}
+      volume={volume}
+      uuidList={uuidList}
+      index={index}
     />
   ))
 }

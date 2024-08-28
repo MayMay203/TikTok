@@ -2,19 +2,20 @@ import styles from './VideoItem.module.scss'
 import { useRef, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MusicIcon, NoVolumeIcon, PauseIcon, PlayVideoIcon, VolumeIcon } from '~/components/Icon/Icon'
 import ButtonList from '../ButtonList'
 
 const cx = classNames.bind(styles)
 const defaultFn = () => {}
-function VideoItem({ data, handleMute = defaultFn, handleUnmute = defaultFn, muted, handleVolume = defaultFn, volume}) {
+function VideoItem({ data, handleMute = defaultFn, handleUnmute = defaultFn, muted, handleVolume = defaultFn, volume, uuidList, index}) {
+  const navigate = useNavigate()
   const videoRef = useRef(null)
   const playRef = useRef(null)
   const pauseRef = useRef(null)
 
   const { thumb_url, file_url, description, music } = data
-  const { nickname, avatar } = data.user
+  const { nickname} = data.user
 
   useEffect(() => {
     const handlePlayPause = (entries) => {
@@ -61,7 +62,14 @@ function VideoItem({ data, handleMute = defaultFn, handleUnmute = defaultFn, mut
           className={cx('video')}
           muted={muted}
           onEnded={handleEnded}
-          volume = {volume}
+          volume={volume}
+          onClick={() => {
+            navigate(`/@${data.user.nickname}/video/${data.uuid}`, {
+              state: {
+                uuid: data.uuid
+              }
+            })
+          }}
         ></video>
         <div className={cx('control')}>
           <button
@@ -134,6 +142,8 @@ VideoItem.propTypes = {
   handleUnmute: PropTypes.func.isRequired,
   muted: PropTypes.bool.isRequired,
   handleVolume: PropTypes.func.isRequired,
+  uuidList: PropTypes.array.isRequired,
+  index: PropTypes.number.isRequired
 }
 
 export default VideoItem
