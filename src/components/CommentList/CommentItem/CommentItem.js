@@ -1,10 +1,9 @@
 import styles from './CommentItem.module.scss'
 import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { Link } from 'react-router-dom'
-import images from '~/assets/images'
-import { HeartCommentIcon, HeartIcon, LikedIcon } from '~/components/Icon'
+import { HeartCommentIcon, LikedIcon } from '~/components/Icon'
 import Image from '~/components/Image'
 import { likeComment } from '~/services/likeComment'
 import { unlikeComment } from '~/services/unLikeComment'
@@ -15,6 +14,9 @@ function CommentItem({ data }) {
   const {id, comment, likes_count, updated_at, is_liked } = dataComment
   const { nickname, avatar } = dataComment.user
 
+  useEffect(() => {
+  }, [dataComment])
+  
   const handleLikeComment = async() => {
     const data = await likeComment(id);
     if (data) {
@@ -64,4 +66,4 @@ CommentItem.propTypes = {
   data: PropTypes.object.isRequired,
 }
 
-export default CommentItem
+export default memo(CommentItem)
