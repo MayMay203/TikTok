@@ -6,7 +6,7 @@ import Image from '~/components/Image'
 import Button from '~/components/Button'
 import { AddIcon, CommentIcon, FavoriteIcon, HeartIcon, LikedIcon, ShareVideoIcon } from '~/components/Icon'
 import { likeVideo } from '~/services/likeVideo'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { unlikeVideo } from '~/services/unlikeVideo'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
@@ -19,6 +19,10 @@ function ButtonList({ data, className, dnone, gap, small }) {
   const userContext = useContext(UserContext)
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    setDataVideo(data)
+  }, [data])
 
   const handleLikeUnlikeVideo = async () => {
     if (userContext.isLogin) {
@@ -40,7 +44,11 @@ function ButtonList({ data, className, dnone, gap, small }) {
 
   const handleComment = () => {
     if (userContext.isLogin) {
-      navigate(`/@${nickname}/video/${uuid}`)
+      navigate(`/@${nickname}/video/${uuid}`, {
+        state: {
+          uuid,
+        },
+      })
     } else {
       authContext.handleShowLogin()
     }
@@ -74,7 +82,7 @@ function ButtonList({ data, className, dnone, gap, small }) {
         </Button>
         <p className={cx('number')}>{views_count ? views_count : 0}</p>
       </div>
-      <div className={cx('item',{dnone})}>
+      <div className={cx('item', { dnone })}>
         <Button circle className={cx({ small })}>
           <ShareVideoIcon />
         </Button>

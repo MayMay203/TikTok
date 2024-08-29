@@ -1,4 +1,4 @@
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styles from './DetailVideo.module.scss'
 import classNames from 'classnames/bind'
 import { useContext, useEffect, useRef, useState } from 'react'
@@ -23,39 +23,46 @@ import { getCommentsList } from '~/services/getCommentsList'
 import CommentList from '~/components/CommentList'
 import { UserContext } from '~/components/Context/UserContext'
 import { createComment } from '~/services/createNewComment'
+import { ErrorModalContext } from '~/components/Modal/ErrorModalContext'
 
 const cx = classNames.bind(styles)
 function DetailVideo() {
   const location = useLocation()
   const { uuid } = location.state || {}
-  console.log(uuid)
+
   const [videoData, setVideoData] = useState({})
-  const [userData, setUserData] = useState(videoData?.user)
+  const [userData, setUserData] = useState({})
   const [dataComment, setDataComment] = useState([])
   const [comment, setComment] = useState('')
+
   const containerRef = useRef(null)
   const arrowRef = useRef(null)
   const userContext = useContext(UserContext)
   const inputRef = useRef(null)
 
+  const modal = useContext(ErrorModalContext)
+
   useEffect(() => {
-    const fetchApi = async () => {
+    console.log('Vo day!')
+    const getVideo = async () => {
       const data = await getAVideo(uuid)
       if (data) {
+        console.log('Video data: ', data)
         setVideoData(data)
       }
     }
-    fetchApi()
-  }, [])
+
+    getVideo()
+  }, [uuid, dataComment])
 
   useEffect(() => {
-    const fetchApi = async () => {
+    const getCommentList = async () => {
       const data = await getCommentsList(videoData.id)
       if (data) {
-        setDataComment(data)
+        setDataComment([...data])
       }
     }
-    fetchApi()
+    getCommentList()
   }, [videoData.id])
 
   useEffect(() => {
@@ -81,12 +88,16 @@ function DetailVideo() {
 
   const handleFollow = async () => {
     const dataRes = await followUser(videoData.user_id)
-    setUserData(dataRes)
+    if (dataRes) {
+      setUserData(dataRes)
+    }
   }
 
   const handleUnFollow = async () => {
     const dataRes = await unFollowUser(videoData.user_id)
-    setUserData(dataRes)
+    if (dataRes) {
+      setUserData(dataRes)
+    }
   }
 
   const handleCopyToClipBoard = () => {
@@ -102,9 +113,18 @@ function DetailVideo() {
   }
 
   const handlePostComment = async () => {
-    const data = await createComment(uuid, comment)
+    if (comment.trim() === '') {
+      modal.setTitle('Error')
+      modal.setMessage('Adding a new comment failed')
+      modal.setIsShow(true)
+      return
+    }
+    const data = await createComment(uuid, comment.trim())
     if (data) {
-      setDataComment(prev => [data, ...prev])
+      modal.setTitle('Done')
+      modal.setMessage('Adding a new comment successfully')
+      modal.setIsShow(true)
+      setDataComment((prev) => [data, ...prev])
       setComment('')
     }
   }
@@ -128,7 +148,7 @@ function DetailVideo() {
                     </div>
                   </div>
                 </Link>
-                {!videoData.user?.is_followed ? (
+                {!userData?.is_followed ? (
                   <Button primary onClick={handleFollow}>
                     Follow
                   </Button>
@@ -190,7 +210,15 @@ function DetailVideo() {
               className={cx('comment-input')}
               placeholder="Add comment..."
               value={comment}
-              onChange={(e) => setComment(e.target.value)}
+              onChange={(e) => {
+                e.target.value = e.target.value.trimStart()
+                setComment(e.target.value)
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handlePostComment()
+                }
+              }}
             />
             <button className={cx('post-btn')} onClick={handlePostComment}>
               Post
@@ -204,5 +232,4 @@ function DetailVideo() {
   )
 }
 
-      
 export default DetailVideo
