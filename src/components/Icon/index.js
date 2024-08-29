@@ -48,5 +48,6 @@ export {
   FacebookIcon, 
   EmbedIcon, 
   SendIcon,
-  HeartCommentIcon
+  HeartCommentIcon,
+  DeleteIcon
 } from './Icon'

@@ -1,24 +1,23 @@
 import styles from './CommentItem.module.scss'
 import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
-import { useState, useEffect, memo } from 'react'
+import { useState, memo, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { HeartCommentIcon, LikedIcon } from '~/components/Icon'
+import { UserContext } from '~/components/Context/UserContext'
+import { HeartCommentIcon, LikedIcon, DeleteIcon } from '~/components/Icon'
 import Image from '~/components/Image'
 import { likeComment } from '~/services/likeComment'
 import { unlikeComment } from '~/services/unLikeComment'
 
 const cx = classNames.bind(styles)
-function CommentItem({ data }) {
+function CommentItem({ data, handleDeleteComment }) {
   const [dataComment, setDataComment] = useState(data)
-  const {id, comment, likes_count, updated_at, is_liked } = dataComment
+  const { id, comment, likes_count, updated_at, is_liked } = dataComment
   const { nickname, avatar } = dataComment.user
+  const userContext = useContext(UserContext)
 
-  useEffect(() => {
-  }, [dataComment])
-  
-  const handleLikeComment = async() => {
-    const data = await likeComment(id);
+  const handleLikeComment = async () => {
+    const data = await likeComment(id)
     if (data) {
       setDataComment(data)
     }
@@ -27,7 +26,7 @@ function CommentItem({ data }) {
   const handleUnlikeComment = async () => {
     const data = await unlikeComment(id)
     if (data) {
-      setDataComment(data);
+      setDataComment(data)
     }
   }
 
@@ -46,6 +45,11 @@ function CommentItem({ data }) {
         <time className={cx('time')}>{updated_at}</time>
       </div>
       <div className={cx('interact')}>
+        {userContext.currentUser.id === dataComment.user.id && (
+          <button className={cx('delete-btn')} onClick={() => handleDeleteComment(dataComment.id)}>
+            <DeleteIcon />
+          </button>
+        )}
         {!is_liked && (
           <button onClick={handleLikeComment}>
             <HeartCommentIcon />
@@ -53,7 +57,7 @@ function CommentItem({ data }) {
         )}
         {is_liked && (
           <button onClick={handleUnlikeComment}>
-            <LikedIcon width='2rem' height='2rem'/>
+            <LikedIcon width="2rem" height="2rem" />
           </button>
         )}
         <span className={cx('number')}>{likes_count}</span>
@@ -64,6 +68,7 @@ function CommentItem({ data }) {
 
 CommentItem.propTypes = {
   data: PropTypes.object.isRequired,
+  handleDeleteComment: PropTypes.object.isRequired
 }
 
 export default memo(CommentItem)

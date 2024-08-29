@@ -10,6 +10,7 @@ import { MusicColorIcon } from '~/components/Icon'
 import { followUser } from '~/services/followService'
 import { unFollowUser } from '~/services/unFollowService'
 import ButtonList from '../Home/ButtonList'
+import { deleteComment } from '~/services/deleteComment'
 import {
   ArrowUpIcon,
   EmbedIcon,
@@ -43,11 +44,9 @@ function DetailVideo() {
   const modal = useContext(ErrorModalContext)
 
   useEffect(() => {
-    console.log('Vo day!')
     const getVideo = async () => {
       const data = await getAVideo(uuid)
       if (data) {
-        console.log('Video data: ', data)
         setVideoData(data)
       }
     }
@@ -129,6 +128,13 @@ function DetailVideo() {
     }
   }
 
+  const handleDeleteComment = async (idComment) => {
+    if (window.confirm('Are you sure to delete this comment?')) {
+      await deleteComment(idComment)
+      setDataComment((prev) => prev.filter(comment => comment.id !== idComment))
+    }
+  }
+
   return (
     <div className={cx('wrapper')}>
       <VideoItem data={videoData} />
@@ -192,7 +198,7 @@ function DetailVideo() {
             </div>
           </div>
           <div className={cx('comments')}>
-            <CommentList data={dataComment} />
+            <CommentList data={dataComment} handleDeleteComment={handleDeleteComment} />
           </div>
           <button
             ref={arrowRef}
