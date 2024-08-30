@@ -14,7 +14,10 @@ function VideoList({
   isDetail,
   play,
   handleNextVideo,
-  handleBackVideo
+  handleBackVideo,
+  handleFollow,
+  handleUnFollow,
+  customObjectFit
 }) {
   const [volume, setVolume] = useState(0)
   const [prevVolume, setPrevVolume] = useState(localStorage.getItem('volume'))
@@ -57,6 +60,9 @@ function VideoList({
         play={play}
         handleBackVideo={handleBackVideo}
         handleNextVideo={handleNextVideo}
+        handleFollow={handleFollow}
+        handleUnFollow={handleUnFollow}
+        customObjectFit={customObjectFit}
       />
     )
   })
@@ -74,6 +80,9 @@ VideoList.propTypes = {
   isDetail: PropTypes.bool,
   play: PropTypes.bool,
   handleBackVideo: PropTypes.func,
-  handleNextVideo: PropTypes.func
+  handleNextVideo: PropTypes.func,
+  handleFollow: PropTypes.func,
+  handleUnFollow: PropTypes.func,
+  customObjectFit: PropTypes.bool
 }
 export default VideoList

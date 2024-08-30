@@ -33,6 +33,9 @@ function VideoItem({
   isDetail = false,
   handleBackVideo = defaultFn,
   handleNextVideo = defaultFn,
+  handleFollow,
+  handleUnFollow,
+  customObjectFit
 }) {
   const [isPlaying, setIsPlaying] = useState(true)
   const [currentTime, setCurrentTime] = useState(0)
@@ -66,13 +69,13 @@ function VideoItem({
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
-            if (videoRef.current.readyState >= 3) {
+            if (videoRef.current?.readyState >= 3) {
               videoRef.current.play()
               setIsPlaying(true)
             }
           }, 200)
         } else {
-          videoRef.current.pause()
+          videoRef.current?.pause()
           setIsPlaying(false)
         }
       })
@@ -109,10 +112,10 @@ function VideoItem({
     <div className={cx('wrapper', { customWidth, customHeight, customBorderRadius })}>
       <div className={cx('container')}>
         <video
+          className={cx('video',{customObjectFit})}
           ref={videoRef}
           src={file_url}
           poster={thumb_url}
-          className={cx('video')}
           muted={volume === 0}
           onEnded={handleEnded}
           volume={volume}
@@ -238,7 +241,7 @@ function VideoItem({
           )}
         </div>
       </div>
-      <ButtonList data={data} className={cx({ dnone })} />
+      <ButtonList data={data} className={cx({ dnone })} handleFollow={handleFollow} handleUnFollow={handleUnFollow} />
     </div>
   )
 }
@@ -258,6 +261,9 @@ VideoItem.propTypes = {
   isDetail: PropTypes.bool,
   handleBackVideo: PropTypes.func,
   handleNextVideo: PropTypes.func,
+  handleFollow: PropTypes.func,
+  handleUnFollow: PropTypes.func,
+  customObjectFit: PropTypes.bool
 }
 
 export default VideoItem

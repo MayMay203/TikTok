@@ -10,16 +10,14 @@ import { useContext, useEffect, useState } from 'react'
 import { unlikeVideo } from '~/services/unlikeVideo'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
-import { followUser } from '~/services/followService'
-import { unFollowUser } from '~/services/unFollowService'
 
 const cx = classNames.bind(styles)
-function ButtonList({ data, className, dnone, gap, small }) {
+
+const defaultFn = () => {}
+function ButtonList({ data, className, dnone, gap, small, handleFollow = defaultFn, handleUnFollow = defaultFn }) {
   const [dataVideo, setDataVideo] = useState(data)
   const { id, user_id, uuid, likes_count, comments_count, shares_count, views_count, is_liked } = dataVideo
   const { nickname, avatar, is_followed } = dataVideo.user
-
-  const [isFollowed, setIsFollowed] = useState(is_followed)
 
   const userContext = useContext(UserContext)
   const authContext = useContext(AuthContext)
@@ -59,29 +57,19 @@ function ButtonList({ data, className, dnone, gap, small }) {
     }
   }
 
-  const handleFollow = async () => {
-    const data = await followUser(user_id)
-    setIsFollowed(true)
-  }
-
-  const handleUnFollow = async () => {
-    const data = await unFollowUser(user_id)
-    setIsFollowed(false)
-  }
-
   return (
     <div className={cx('wrapper', className)}>
       <div className={cx('post-user', { dnone })}>
         <Link to={`/@${nickname}`}>
           <Image src={avatar} alt={nickname} className={cx('user-avatar')} />
         </Link>
-        {!isFollowed && (
-          <button className={cx('add-btn')} onClick={handleFollow}>
+        {!is_followed && (
+          <button className={cx('add-btn')} onClick={() => handleFollow(user_id)}>
             <AddIcon />
           </button>
         )}
-        {isFollowed && (
-          <button className={cx('check-btn')} onClick={handleUnFollow}>
+        {is_followed && (
+          <button className={cx('check-btn')} onClick={() => handleUnFollow(user_id)}>
             <CheckIcon />
           </button>
         )}
@@ -118,6 +106,8 @@ ButtonList.propTypes = {
   data: PropTypes.object.isRequired,
   classNames: PropTypes.string,
   dnone: PropTypes.bool,
+  handleFollow: PropTypes.func,
+  handleUnFollow: PropTypes.func,
 }
 
 export default ButtonList
