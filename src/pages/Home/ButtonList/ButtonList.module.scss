@@ -18,15 +18,27 @@
     object-fit: cover;
 }
 
+.check-btn,
 .add-btn{
-    background-color: var(--primary-color);
+    position: absolute;
     border-radius: 50%;
     width: 24px;
     height: 24px;
-    position: absolute;
     bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.add-btn{
+    background-color: var(--primary-color);
+}
+
+.check-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--check-btn-bg);
+    border: 1px solid #1618231f;
 }
 
 .number{
