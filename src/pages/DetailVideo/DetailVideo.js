@@ -207,6 +207,7 @@ function DetailVideo() {
           play
           handleNextVideo={handleBackVideo}
           handleBackVideo={handleNextVideo}
+          customObjectFit
         />
       )}
       <div className={cx('right')}>

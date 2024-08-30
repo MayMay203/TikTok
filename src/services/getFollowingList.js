@@ -1,9 +1,9 @@
 import * as request from '~/utils/httpRequest'
-export const getFollowingList = async (page, token) => {
+export const getFollowingList = async (page) => {
     try {
         const res = await request.get(`/me/followings`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             params: {
                 page
