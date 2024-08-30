@@ -68,7 +68,7 @@ function CommentItem({ data, handleDeleteComment }) {
 
 CommentItem.propTypes = {
   data: PropTypes.object.isRequired,
-  handleDeleteComment: PropTypes.object.isRequired
+  handleDeleteComment: PropTypes.func.isRequired
 }
 
 export default memo(CommentItem)

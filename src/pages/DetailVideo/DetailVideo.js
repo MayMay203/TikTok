@@ -1,11 +1,10 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import styles from './DetailVideo.module.scss'
 import classNames from 'classnames/bind'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { getAVideo } from '~/services/getAVideo'
 import Image from '~/components/Image'
 import Button from '~/components/Button'
-import VideoItem from './VideoItem'
 import { MusicColorIcon } from '~/components/Icon'
 import { followUser } from '~/services/followService'
 import { unFollowUser } from '~/services/unFollowService'
@@ -25,13 +24,20 @@ import CommentList from '~/components/CommentList'
 import { UserContext } from '~/components/Context/UserContext'
 import { createComment } from '~/services/createNewComment'
 import { ErrorModalContext } from '~/components/Modal/ErrorModalContext'
+import { getVideosList } from '~/services/getVideosList'
+import VideoList from '~/components/VideoList'
 
 const cx = classNames.bind(styles)
 function DetailVideo() {
   const location = useLocation()
+  const navigate = useNavigate()
   const { uuid } = location.state || {}
 
+  const [videosList, setVideosList] = useState([])
+  const [page, setPage] = useState(1)
+
   const [videoData, setVideoData] = useState({})
+  const [videoIndex, setVideoIndex] = useState(-1)
   const [userData, setUserData] = useState({})
   const [dataComment, setDataComment] = useState([])
   const [comment, setComment] = useState('')
@@ -43,11 +49,39 @@ function DetailVideo() {
 
   const modal = useContext(ErrorModalContext)
 
+  // Get list data
+  useEffect(() => {
+    const fetchApi = async () => {
+      const result = await getVideosList('for-you', page)
+      if (result) {
+        setVideosList((prev) => [...prev, ...result])
+      }
+    }
+    fetchApi()
+  }, [page])
+
+  const handleScrollbar = () => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY + window.innerHeight >= document.body.offsetHeight) {
+        setPage(page + 1)
+      }
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScrollbar)
+    return () => {
+      window.removeEventListener('scroll', handleScrollbar)
+    }
+  }, [])
+
   useEffect(() => {
     const getVideo = async () => {
       const data = await getAVideo(uuid)
       if (data) {
         setVideoData(data)
+        const index = videosList.findIndex((video) => video.id === videoData.id)
+        setVideoIndex(index)
       }
     }
 
@@ -131,13 +165,50 @@ function DetailVideo() {
   const handleDeleteComment = async (idComment) => {
     if (window.confirm('Are you sure to delete this comment?')) {
       await deleteComment(idComment)
-      setDataComment((prev) => prev.filter(comment => comment.id !== idComment))
+      setDataComment((prev) => prev.filter((comment) => comment.id !== idComment))
+    }
+  }
+
+  const handleBackVideo = () => {
+    if (videoIndex > 0) {
+      navigate(`/@${videosList[videoIndex - 1].user.nickname}/video/${videosList[videoIndex].uuid}`, {
+        state: {
+          uuid: videosList[videoIndex-1].uuid,
+        },
+        replace: true,
+      })
+    }
+  }
+
+  const handleNextVideo = () => {
+    if (videoIndex < videosList.length - 1) {
+      navigate(`/@${videosList[videoIndex + 1].user.nickname}/video/${videosList[videoIndex].uuid}`, {
+        state: {
+          uuid: videosList[videoIndex+1].uuid,
+        },
+        replace: true,
+      })
     }
   }
 
   return (
     <div className={cx('wrapper')}>
-      <VideoItem data={videoData} />
+      {videoIndex !== -1 && (
+        <VideoList
+          data={[videoData]}
+          dnone
+          customWidth
+          customBg
+          customHeight
+          customBorderRadius
+          customBtn
+          customMargin
+          isDetail
+          play
+          handleNextVideo={handleBackVideo}
+          handleBackVideo={handleNextVideo}
+        />
+      )}
       <div className={cx('right')}>
         <div className={cx('container')} ref={containerRef}>
           <div className={cx('content')}>

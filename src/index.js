@@ -9,20 +9,21 @@ import { ThemeProvider } from './components/Context/ThemeContext';
 import {UserProvider} from './components/Context/UserContext';
 import { AuthProvider } from './components/Modal/AuthModalContext'
 import { ErrorModalProvider } from './components/Modal/ErrorModalContext';
+import VideoListProvider from './components/VideoList/VideoList'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <GlobalStyles>
-     <ErrorModalProvider>
+      <ErrorModalProvider>
         <UserProvider>
           <AuthProvider>
             <ThemeProvider>
-              <App />
+                <App />
             </ThemeProvider>
           </AuthProvider>
         </UserProvider>
-     </ErrorModalProvider>
+      </ErrorModalProvider>
     </GlobalStyles>
   </React.StrictMode>,
 )

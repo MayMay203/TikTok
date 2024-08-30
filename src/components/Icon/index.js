@@ -49,5 +49,7 @@ export {
   EmbedIcon, 
   SendIcon,
   HeartCommentIcon,
-  DeleteIcon
+  DeleteIcon,
+  PlayFillIcon,
+  Arrow
 } from './Icon'

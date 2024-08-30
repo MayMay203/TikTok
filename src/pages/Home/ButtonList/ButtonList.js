@@ -15,6 +15,7 @@ const cx = classNames.bind(styles)
 function ButtonList({ data, className, dnone, gap, small }) {
   const [dataVideo, setDataVideo] = useState(data)
   const { id, uuid, likes_count, comments_count, shares_count, views_count, is_liked } = dataVideo
+
   const { nickname, avatar } = dataVideo.user
   const userContext = useContext(UserContext)
   const authContext = useContext(AuthContext)
