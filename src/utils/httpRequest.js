@@ -13,4 +13,9 @@ export const post = async (path, body={}, options = {}) => {
   return response.data;
 }
 
+export const DELETE = async (path, options = {}) => {
+  const response = await request.delete(path, options)
+  return response.data
+}
+
 export default request

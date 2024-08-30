@@ -5,15 +5,18 @@ import CommentItem from './CommentItem';
 import { memo } from 'react';
 
 const cx = classNames.bind(styles)
-function CommentList({ data }) {
-    return (<div className={cx('wrapper')}>
-        {data.map((item) => (
-            <CommentItem key={item.id} data={item}/>
-        ))}
-    </div> );
+function CommentList({ data, handleDeleteComment }) {
+  return (
+    <div className={cx('wrapper')}>
+      {data.map((item) => (
+        <CommentItem key={item.id} data={item} handleDeleteComment={handleDeleteComment} />
+      ))}
+    </div>
+  )
 }
 
 CommentList.propTypes = {
-    data: PropTypes.array,
+  data: PropTypes.array,
+  handleDeleteComment: PropTypes.func.isRequired,
 }
 export default memo(CommentList);

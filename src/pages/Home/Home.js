@@ -2,7 +2,7 @@ import classNames from 'classnames/bind'
 import styles from './Home.module.scss'
 import { useEffect, useState } from 'react'
 import { getVideosList } from '~/services/getVideosList'
-import VideoList from './VideoItem/VideoList'
+import VideoList from '../../components/VideoList/VideoList'
 import { ArrowUpIcon } from '~/components/Icon'
 
 const cx = classNames.bind(styles)
