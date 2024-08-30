@@ -121,6 +121,7 @@
 .share-icon{
     width: 1.6rem;
     height: 1.6rem;
+    color: var(--text-color);
 }
 
 .round{
@@ -141,7 +142,7 @@
 
 .link{
     flex: 1;
-    color: #161823bf;
+    color: var(--link-color);
     padding: 7px 0px 5px 12px;
     display: -webkit-box;      
     -webkit-box-orient: vertical; 
@@ -156,6 +157,7 @@
     padding: 7px 18px;
     font-weight: 700;
     opacity: 0.8;
+    color: var(--text-color);
 
     &:hover{
         opacity: 0.9;
@@ -172,7 +174,7 @@
     padding: 21px 30px;
     display: flex;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--write-comment-bg);
     position: absolute;
     left: 0;
     bottom: 0;

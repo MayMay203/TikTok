@@ -31,7 +31,6 @@ function VideoItem({
   customBtn = false,
   customMargin = false,
   isDetail = false,
-  // play = false,
   handleBackVideo = defaultFn,
   handleNextVideo = defaultFn,
 }) {

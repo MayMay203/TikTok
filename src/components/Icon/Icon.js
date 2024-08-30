@@ -1026,3 +1026,16 @@ export const Arrow = ({ width = '2.6rem', height = '2.6rem', className }) => (
     ></path>
   </svg>
 )
+
+export const CheckIcon = ({ width = '1.4rem', height = '1.4rem', className }) => (
+  <svg
+    className={className}
+    width={width}
+    height={height}
+    fill="rgb(254, 44, 85)"
+    viewBox="0 0 48 48"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="m19.71 36.03 19.73-30.5a1 1 0 0 1 1.39-.3l2.35 1.53c.46.3.6.92.3 1.38L22.01 41.3a2.4 2.4 0 0 1-3.83.28L4.85 26.33a1 1 0 0 1 .1-1.4l2.1-1.85a1 1 0 0 1 1.42.1L19.7 36.02Z"></path>
+  </svg>
+)

@@ -4,19 +4,23 @@ import classNames from 'classnames/bind'
 import { Link, useNavigate } from 'react-router-dom'
 import Image from '~/components/Image'
 import Button from '~/components/Button'
-import { AddIcon, CommentIcon, FavoriteIcon, HeartIcon, LikedIcon, ShareVideoIcon } from '~/components/Icon'
+import { AddIcon, CheckIcon, CommentIcon, FavoriteIcon, HeartIcon, LikedIcon, ShareVideoIcon } from '~/components/Icon'
 import { likeVideo } from '~/services/likeVideo'
 import { useContext, useEffect, useState } from 'react'
 import { unlikeVideo } from '~/services/unlikeVideo'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
+import { followUser } from '~/services/followService'
+import { unFollowUser } from '~/services/unFollowService'
 
 const cx = classNames.bind(styles)
 function ButtonList({ data, className, dnone, gap, small }) {
   const [dataVideo, setDataVideo] = useState(data)
-  const { id, uuid, likes_count, comments_count, shares_count, views_count, is_liked } = dataVideo
+  const { id, user_id, uuid, likes_count, comments_count, shares_count, views_count, is_liked } = dataVideo
+  const { nickname, avatar, is_followed } = dataVideo.user
 
-  const { nickname, avatar } = dataVideo.user
+  const [isFollowed, setIsFollowed] = useState(is_followed)
+
   const userContext = useContext(UserContext)
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
@@ -55,15 +59,32 @@ function ButtonList({ data, className, dnone, gap, small }) {
     }
   }
 
+  const handleFollow = async () => {
+    const data = await followUser(user_id)
+    setIsFollowed(true)
+  }
+
+  const handleUnFollow = async () => {
+    const data = await unFollowUser(user_id)
+    setIsFollowed(false)
+  }
+
   return (
     <div className={cx('wrapper', className)}>
       <div className={cx('post-user', { dnone })}>
         <Link to={`/@${nickname}`}>
           <Image src={avatar} alt={nickname} className={cx('user-avatar')} />
         </Link>
-        <button className={cx('add-btn')}>
-          <AddIcon />
-        </button>
+        {!isFollowed && (
+          <button className={cx('add-btn')} onClick={handleFollow}>
+            <AddIcon />
+          </button>
+        )}
+        {isFollowed && (
+          <button className={cx('check-btn')} onClick={handleUnFollow}>
+            <CheckIcon />
+          </button>
+        )}
       </div>
       <div className={cx('item', className, { gap })}>
         <Button circle onClick={handleLikeUnlikeVideo} className={cx({ small })}>
