@@ -1,0 +1,23 @@
+.tab-buttons{
+    position: fixed;
+    top: 60px;
+    left: 240px;
+    right: 0;
+    z-index: 1;
+    padding: 12px;
+    transition: transform .3s ease;  
+    background-color: var(--tab-buttons-bg);
+}
+
+.video-list{
+    margin-top: 66px;
+    padding: 0 12px;
+}
+
+.tab-buttons.hidden {
+  transform: translateY(-100%);
+}
+
+.tab-buttons.visible {
+  transform: translateY(0);
+}

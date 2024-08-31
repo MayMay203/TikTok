@@ -1,0 +1,24 @@
+.wrapper{
+    display: flex;
+    column-gap: 12px;
+}
+
+.btn{
+    height: 42px;
+    padding: 0 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    border-radius: 8px;
+    background-color: var(--btn-tab-bg);
+    color: var(--btn-tab-color);
+
+    &:hover{
+        background-color: var(--btn-tab-hover-bg);
+    }
+}
+
+.active{
+    background-color: var(--selected-btn-tab-bg);
+    color: var(--selected-btn-tab-color);
+}
+
