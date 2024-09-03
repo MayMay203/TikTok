@@ -4,7 +4,7 @@ import styles from './VideoList.module.scss'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
-function VideoList({ dataVideo, classNames }) {
+function VideoList({ dataVideo, classNames, muted, handleMute, handleUnMute, isExplore, volume }) {
   return (
     <div
       className={cx(
@@ -19,7 +19,7 @@ function VideoList({ dataVideo, classNames }) {
       )}
     >
       {dataVideo.map((video, index) => (
-        <VideoItem key={index} data={video} />
+        <VideoItem key={index} data={video} muted={muted} handleMute={handleMute} handleUnMute={handleUnMute} isExplore={ isExplore} volume={volume} />
       ))}
     </div>
   )

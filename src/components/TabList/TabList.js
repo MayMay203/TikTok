@@ -2,7 +2,7 @@ import styles from './TabList.module.scss'
 import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
 import { memo, useEffect, useRef, useState } from 'react'
-import VideoList from '../../pages/Profile/VideoList'
+import VideoList from '../VideoSmallList'
 import { LockBigIcon } from '../Icon'
 
 const cx = classNames.bind(styles)

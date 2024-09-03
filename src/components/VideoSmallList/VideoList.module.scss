@@ -2,6 +2,10 @@
     position: relative;
     width: 100%;
     padding-top: 132%;
+
+    &:hover .volume-btn, &:hover .novolume-btn{
+        opacity: 1;
+    }
 }
 
 .video{
@@ -32,3 +36,14 @@
     column-gap: 4px;
 }
 
+.novolume-btn,
+.volume-btn{
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        padding: 8px;
+        opacity: 0;
+        transition: opacity .2s ease;
+}
