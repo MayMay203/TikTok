@@ -10,6 +10,7 @@ import { UserContext } from '../Context/UserContext'
 import { followUser } from '~/services/followService'
 import { unFollowUser } from '~/services/unFollowService'
 import { getFollowingList } from '~/services/getFollowingList'
+import { EditContext } from '../Modal/EditProfileModal'
 
 const cx = classNames.bind(styles)
 function UserProfile({ dataUser }) {
@@ -28,6 +29,7 @@ function UserProfile({ dataUser }) {
 
   const [isFollowing, setIsFollowing] = useState(is_followed)
   const userContext = useContext(UserContext)
+  const editContext = useContext(EditContext)
 
   const handleFollow = async () => {
     const data = await followUser(id)
@@ -45,8 +47,12 @@ function UserProfile({ dataUser }) {
 
   const handleGetFollowingList = async () => {
     const data = await getFollowingList(1);
-    console.log(data)
   }
+
+  const handleEditProfile = () => {
+    editContext.handleShowEditModal();
+  }
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('avatar-wrapper')}>
@@ -75,7 +81,7 @@ function UserProfile({ dataUser }) {
           )}
           {userContext.currentUser.id === id && (
             <>
-              <Button primary className={cx('custom-height')}>
+              <Button primary className={cx('custom-height')} onClick={handleEditProfile}>
                 Edit profile
               </Button>
               <button className={cx('btn')}>

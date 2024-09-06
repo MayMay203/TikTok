@@ -2,15 +2,17 @@ import styles from './Form.module.scss'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
-function FormInput({ id, title, error, show = false, className, customWidth = false, ...props }) {
+function FormTextArea({ id, title, show = false, className, customWidth = false, ...props }) {
   return (
     <div className={cx('form-group', { [className]: className })}>
       <label className={cx('form-label')} htmlFor={id}>
         {title}
       </label>
-      <input
+      <textarea
+        maxLength={80}
         id={id}
-        className={cx('form-input', { customWidth })}
+        rows={3}
+        className={cx('form-textarea', { customWidth })}
         {...props}
         required
         onKeyDown={(e) => {
@@ -18,16 +20,9 @@ function FormInput({ id, title, error, show = false, className, customWidth = fa
             e.preventDefault()
           }
         }}
-      ></input>
-      <p
-        className={cx('form-error', {
-          show,
-        })}
-      >
-        {error}
-      </p>
+      ></textarea>
     </div>
   )
 }
 
-export default FormInput
+export default FormTextArea

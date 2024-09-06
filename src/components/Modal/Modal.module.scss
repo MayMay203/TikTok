@@ -1,7 +1,6 @@
 .modal-title{
     font-size: 3.3rem;
-   padding: 8px 0;
-   margin-left: 23%;
+   padding: 8px 0 8px 12px;
    text-align: center;
    white-space: nowrap;
 }
@@ -39,9 +38,26 @@
 }
 
 .custom-background{
-    background-color: var(--modal-bg);
+    background-color: var(--modal-bg)!important;
 }
 
 .custom-border-bg{
-    border-bottom: 1px solid var(--border-color)!important;
+    border-color: var(--border-color)!important;
+}
+
+.inline{
+    padding-top: 16px;
+    flex-direction: row!important;
+    column-gap: 60px;
+    border-top: 1px solid var(--border-color);
+}
+
+.notice{
+    padding: 8px 0 16px 160px;
+    font-size: 1.3rem;
+    color: var(--notice-color)
+}
+
+.custom-width{
+    width: 600px!important;
 }

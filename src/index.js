@@ -9,7 +9,7 @@ import { ThemeProvider } from './components/Context/ThemeContext';
 import {UserProvider} from './components/Context/UserContext';
 import { AuthProvider } from './components/Modal/AuthModalContext'
 import { ErrorModalProvider } from './components/Modal/ErrorModalContext';
-import VideoListProvider from './components/VideoList/VideoList'
+import {EditProfileProvider} from './components/Modal/EditProfileModal'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -19,7 +19,9 @@ root.render(
         <UserProvider>
           <AuthProvider>
             <ThemeProvider>
+              <EditProfileProvider>
                 <App />
+              </EditProfileProvider>
             </ThemeProvider>
           </AuthProvider>
         </UserProvider>
