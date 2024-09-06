@@ -98,7 +98,7 @@ function Header() {
     {
       icon: <UserIcon />,
       title: 'View Profile',
-      to: '/profile',
+      to: `/@${userContext.currentUser.nickname}`,
     },
     {
       icon: <CoinIcon />,

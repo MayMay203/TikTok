@@ -581,7 +581,7 @@ export const MoreIcon = ({ width = '1.9rem', height = '1.9rem', className }) => 
     height={height}
     fill="currentColor"
     color="inherit"
-    font-size="inherit"
+    fontSize="inherit"
     viewBox="0 0 48 48"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -596,7 +596,7 @@ export const FollowedIcon = ({ width = '1.9rem', height = '1.9rem', className })
     height={height}
     fill="currentColor"
     color="inherit"
-    font-size="inherit"
+    fontSize="inherit"
     viewBox="0 0 48 48"
     xmlns="http://www.w3.org/2000/svg"
   >
