@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCheck,
@@ -30,6 +30,7 @@ function Header() {
   const authContext = useContext(AuthContext)
   const userContext = useContext(UserContext)
   const isLogin = useContext(UserContext).isLogin
+  const navigate = useNavigate()
   // MENU ITEMS
   const MENU_ITEMS = [
     {
@@ -185,6 +186,10 @@ function Header() {
     }
   }
 
+  const handleUpload = () => {
+    navigate(config.routes.upload)
+  }
+
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -196,7 +201,7 @@ function Header() {
         <div className={cx('actions')}>
           {isLogin ? (
             <div className={cx('current-user')}>
-              <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+              <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />} onClick={handleUpload}>
                 Upload
               </Button>
               <Tippy content="Message">

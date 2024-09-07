@@ -53,4 +53,5 @@ export {
   PlayFillIcon,
   Arrow,
   CheckIcon,
+  UploadVideoIcon
 } from './Icon'
