@@ -6,14 +6,18 @@ import PropTypes from 'prop-types';
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 import MenuItem from './MenuItems'
 import Header from './Header'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const cx = classNames.bind(styles)
 
 const defaultFn = () => {}
-function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false, customHover=false}) {
+function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false, customHover = false }) {
   const [history, setHistory] = useState([{ data: items }])
   const current = history[history.length - 1]
+
+  useEffect(() => {
+    setHistory([{ data: items }])
+  }, [items])
 
   const renderItems = () => {
     return current.data.map((item, index) => {

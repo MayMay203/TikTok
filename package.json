@@ -27,6 +27,7 @@
     "babel-plugin-module-resolver": "^5.0.2",
     "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.2.1",
+    "react-toastify": "^10.0.5",
     "sass": "^1.77.8"
   },
   "scripts": {

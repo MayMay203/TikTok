@@ -16,7 +16,7 @@ function ThemeProvider({ children }) {
 
     const value = {
         theme,
-        toggleTheme
+        toggleTheme,
     }
     return (
         <ThemeContext.Provider value={value}>

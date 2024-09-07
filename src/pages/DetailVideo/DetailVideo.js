@@ -23,9 +23,10 @@ import { getCommentsList } from '~/services/getCommentsList'
 import CommentList from '~/components/CommentList'
 import { UserContext } from '~/components/Context/UserContext'
 import { createComment } from '~/services/createNewComment'
-import { ErrorModalContext } from '~/components/Modal/ErrorModalContext'
 import { getVideosList } from '~/services/getVideosList'
 import VideoList from '~/components/VideoList'
+import { ThemeContext } from '~/components/Context/ThemeContext'
+import { toast } from 'react-toastify'
 
 const cx = classNames.bind(styles)
 function DetailVideo() {
@@ -47,8 +48,7 @@ function DetailVideo() {
   const userContext = useContext(UserContext)
   const inputRef = useRef(null)
 
-  const modal = useContext(ErrorModalContext)
-
+  const themeContext = useContext(ThemeContext)
   // Get list data
   useEffect(() => {
     const fetchApi = async () => {
@@ -147,16 +147,16 @@ function DetailVideo() {
 
   const handlePostComment = async () => {
     if (comment.trim() === '') {
-      modal.setTitle('Error')
-      modal.setMessage('Adding a new comment failed')
-      modal.setIsShow(true)
+      toast.error('Failed to add a new comment', {
+        theme: themeContext.theme ? 'dark' : 'light',
+      })
       return
     }
     const data = await createComment(uuid, comment.trim())
     if (data) {
-      modal.setTitle('Done')
-      modal.setMessage('Adding a new comment successfully')
-      modal.setIsShow(true)
+      toast.success('A new comment has been posted', {
+        theme: themeContext.theme ? 'dark' : 'light',
+      })
       setDataComment((prev) => [data, ...prev])
       setComment('')
     }
@@ -173,7 +173,7 @@ function DetailVideo() {
     if (videoIndex > 0) {
       navigate(`/@${videosList[videoIndex - 1].user.nickname}/video/${videosList[videoIndex].uuid}`, {
         state: {
-          uuid: videosList[videoIndex-1].uuid,
+          uuid: videosList[videoIndex - 1].uuid,
         },
         replace: true,
       })
@@ -184,7 +184,7 @@ function DetailVideo() {
     if (videoIndex < videosList.length - 1) {
       navigate(`/@${videosList[videoIndex + 1].user.nickname}/video/${videosList[videoIndex].uuid}`, {
         state: {
-          uuid: videosList[videoIndex+1].uuid,
+          uuid: videosList[videoIndex + 1].uuid,
         },
         replace: true,
       })
