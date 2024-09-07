@@ -5,7 +5,9 @@
     height: 100vh;
     overscroll-behavior: contain;
     overflow-y: auto;
-    position: relative;
+    position: fixed;
+    top: 60px;
+    left: 0;
     
     &::-webkit-scrollbar-thumb{
         background-color: transparent;
