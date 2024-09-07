@@ -6,12 +6,12 @@ import Video from './Video'
 import Button from '../Button'
 import { useNavigate } from 'react-router-dom'
 import { postNewVideo } from '~/services/postNewVideo'
-import { ErrorModalContext } from '../Modal/ErrorModalContext'
+import { toast } from 'react-toastify'
+import { ThemeContext } from '../Context/ThemeContext'
 
 const cx = classNames.bind(styles)
 function NewVideo({ data, duration }) {
   const navigate = useNavigate()
-  const errorContext = useContext(ErrorModalContext)
 
   const [src, setSrc] = useState(URL.createObjectURL(data))
   const [description, setDescription] = useState('')
@@ -19,6 +19,7 @@ function NewVideo({ data, duration }) {
   const [viewable, setViewAble] = useState('public')
   const [allows, setAllows] = useState([])
   // const [thumbnailTime, setThumbnailTime] = useState(0)
+  const themeContext = useContext(ThemeContext)
 
   const handleClickAllows = (e) => {
     const { id, checked } = e.target
@@ -45,9 +46,9 @@ function NewVideo({ data, duration }) {
     if (dataRes) {
       console.log(dataRes)
     } else {
-      errorContext.setTitle('Error')
-      errorContext.setMessage('Failed to post a new video')
-      errorContext.setIsShow(true)
+      toast.error('Failed to post a new video', {
+        theme: themeContext.theme ? 'dark' : 'light',
+      })
     }
   }
 

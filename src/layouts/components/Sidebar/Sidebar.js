@@ -165,12 +165,14 @@ function Sidebar() {
           icon={<ExploreIcon />}
           activeIcon={<ExploreActiveIcon />}
         />
-        <MenuItem
-          title="Following"
-          to={config.routes.following}
-          icon={<FollowingIcon className={cx('icon')} />}
-          activeIcon={<FollowingActiveIcon className={cx('icon')} />}
-        />
+        {userContext.isLogin && (
+          <MenuItem
+            title="Following"
+            to={config.routes.following}
+            icon={<FollowingIcon className={cx('icon')} />}
+            activeIcon={<FollowingActiveIcon className={cx('icon')} />}
+          />
+        )}
         <MenuItem title="Friends" to={config.routes.friends} icon={<FriendIcon />} activeIcon={<FriendActiveIcon />} />
         <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
         <MenuItem

@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { followUser } from '~/services/followService'
 import { unFollowUser } from '~/services/unFollowService'
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
+import { UserContext } from '../Context/UserContext'
+import { AuthContext } from '../Modal/AuthModalContext'
 
 const cx = classNames.bind(styles)
 function FriendItem({ data }) {
@@ -16,6 +18,8 @@ function FriendItem({ data }) {
   const { file_url, thumb_url } = data.popular_video
   const [isFollowing, setIsFollowing] = useState(is_followed)
   const videoRef = useRef(null)
+  const userContext = useContext(UserContext)
+  const authContext = useContext(AuthContext)
 
   const handleOverVideo = () => {
     setTimeout(() => {
@@ -31,17 +35,25 @@ function FriendItem({ data }) {
 
   const handleFollow = async (e) => {
     e.preventDefault()
-    const data = await followUser(id)
-    if (data) {
-      setIsFollowing((prev) => !prev)
+    if (!userContext.isLogin) {
+      authContext.handleShowLogin()
+    } else {
+      const data = await followUser(id)
+      if (data) {
+        setIsFollowing((prev) => !prev)
+      }
     }
   }
 
   const handleUnFollow = async (e) => {
     e.preventDefault()
-    const data = await unFollowUser(id)
-    if (data) {
-      setIsFollowing((prev) => !prev)
+    if (!userContext.isLogin) {
+      authContext.handleShowLogin()
+    } else {
+      const data = await unFollowUser(id)
+      if (data) {
+        setIsFollowing((prev) => !prev)
+      }
     }
   }
 

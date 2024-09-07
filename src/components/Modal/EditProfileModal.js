@@ -11,13 +11,14 @@ import FormTextArea from '../Form/FormTextArea'
 import FormImage from '../Form/FormImage'
 import { UserContext } from '../Context/UserContext'
 import { updateCurrentUser } from '~/services/updateCurrentUser'
-import { ErrorModalContext } from './ErrorModalContext'
+import { toast } from 'react-toastify'
+import { ThemeContext } from '../Context/ThemeContext'
 
 const EditContext = createContext()
 const cx = classNames.bind(styles)
 function EditProfileProvider({ children }) {
   const userContext = useContext(UserContext)
-  const errorContext = useContext(ErrorModalContext)
+  const themeContext = useContext(ThemeContext)
 
   const [avatar, setAvatar] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -65,11 +66,12 @@ function EditProfileProvider({ children }) {
 
     const data = await updateCurrentUser(formData)
     if (data) {
+      toast.success('Your profile has been updated', { theme: themeContext.theme ? 'dark' : 'light' })
       setIsShow(false)
     } else {
-      errorContext.setTitle('Error update')
-      errorContext.setMessage("Failed to update current user's info")
-      errorContext.setIsShow(true)
+      toast.error("Failed to update current user's info", {
+        theme: themeContext.theme ? 'dark' : 'light',
+      })
     }
   }
 

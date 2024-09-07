@@ -8,24 +8,30 @@ import GlobalStyles from '~/components/GlobalStyles'
 import { ThemeProvider } from './components/Context/ThemeContext';
 import {UserProvider} from './components/Context/UserContext';
 import { AuthProvider } from './components/Modal/AuthModalContext'
-import { ErrorModalProvider } from './components/Modal/ErrorModalContext';
-import {EditProfileProvider} from './components/Modal/EditProfileModal'
+import { EditProfileProvider } from './components/Modal/EditProfileModal'
+import { ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <GlobalStyles>
-      <ErrorModalProvider>
         <UserProvider>
-          <AuthProvider>
-            <ThemeProvider>
+          <ThemeProvider>
+            <AuthProvider>
               <EditProfileProvider>
                 <App />
+                <ToastContainer
+                  position="top-center"
+                  autoClose={2500}
+                  pauseOnHover
+                  closeOnClick
+                  style={{ width: '350px', height: '200px' }}
+                />
               </EditProfileProvider>
-            </ThemeProvider>
-          </AuthProvider>
+            </AuthProvider>
+          </ThemeProvider>
         </UserProvider>
-      </ErrorModalProvider>
     </GlobalStyles>
   </React.StrictMode>,
 )

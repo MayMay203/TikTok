@@ -2,7 +2,6 @@ import classNames from 'classnames/bind'
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faCheck,
   faEllipsisVertical,
   faPlus
 } from '@fortawesome/free-solid-svg-icons'
@@ -22,6 +21,7 @@ import { ThemeContext } from '~/components/Context/ThemeContext'
 import { useContext, useState, useMemo, useEffect } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
+import { toast } from 'react-toastify'
 
 const cx = classNames.bind(styles)
 function Header() {
@@ -34,7 +34,6 @@ function Header() {
   const navigate = useNavigate()
   // MENU ITEMS
   const MENU_ITEMS = useMemo(() => {
-    console.log('Re-render-item')
     return [
       {
         icon: <CreatorIcon />,
@@ -76,12 +75,12 @@ function Header() {
       },
       {
         icon: <DarkIcon />,
-        title: isDark ? 'Dark Mode' : 'Light Mode',
+        title: !isDark ? 'Dark Mode' : 'Light Mode',
         type: 'Dark Mode',
       },
     ]
-  }, [themeContext.theme])
-  
+  }, [isDark])
+
   // USER MENU
   const USER_MENU = useMemo(
     () => [
@@ -129,7 +128,7 @@ function Header() {
         separate: true,
       },
     ],
-    [nickname],
+    [nickname, isDark],
   )
 
   useEffect(() => {
