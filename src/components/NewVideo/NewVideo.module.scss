@@ -13,6 +13,7 @@
 
 .content-main{
     padding: 24px 40px;
+    margin-bottom: 20px;
 }
 
 .name{
@@ -150,7 +151,7 @@
 }
 
 .actions{
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex;
     column-gap: 24px;
 }
@@ -160,16 +161,3 @@
     height: 42px;
 }
 
-.cover-wrapper{
-    width: 100%;
-    height: 168px;
-    padding: 6px;
-    border-radius: 4px;
-}
-
-.cover-range{
-    width: 100%;
-    height: 100%;
-    appearance: none;
-    background-color: transparent;
-}

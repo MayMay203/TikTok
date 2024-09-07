@@ -18,7 +18,7 @@ function NewVideo({ data, duration }) {
   const [music, setMusic] = useState('')
   const [viewable, setViewAble] = useState('public')
   const [allows, setAllows] = useState([])
-  const [thumbnailTime, setThumbnailTime] = useState(0)
+  // const [thumbnailTime, setThumbnailTime] = useState(0)
 
   const handleClickAllows = (e) => {
     const { id, checked } = e.target
@@ -38,14 +38,13 @@ function NewVideo({ data, duration }) {
     const formData = new FormData()
     formData.append('description', description)
     formData.append('upload_file', data.name)
-    formData.append('thumbnail_time', thumbnailTime)
+    formData.append('thumbnail_time', 5)
     formData.append('viewable', viewable)
     formData.append('allows', JSON.stringify(allows))
     const dataRes = await postNewVideo(formData)
     if (dataRes) {
       console.log(dataRes)
-    }
-    else {
+    } else {
       errorContext.setTitle('Error')
       errorContext.setMessage('Failed to post a new video')
       errorContext.setIsShow(true)
@@ -84,21 +83,6 @@ function NewVideo({ data, duration }) {
                 }}
               ></textarea>
               <span className={cx('count')}>{description.length}/100</span>
-            </div>
-          </div>
-          <div className={cx('content-item')}>
-            <span className={cx('sub-title')}>Cover</span>
-            <div className={cx('cover-wrapper')}>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="1"
-                value={thumbnailTime}
-                onChange={(e) => setThumbnailTime(e.target.value)}
-                className={cx('cover-range')}
-              ></input>
-              {/* <video src={src}></video> */}
             </div>
           </div>
           <div className={cx('content-item')}>
