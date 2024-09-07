@@ -1,7 +1,23 @@
 .wrapper{
-    padding: 20px 8px 26px 8px;
+    padding: 20px 8px 80px 8px;
     background-color: var(--sidebar-bg);
     width: 240px;
+    height: 100vh;
+    overscroll-behavior: contain;
+    overflow-y: auto;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    
+    &::-webkit-scrollbar-thumb{
+        background-color: transparent;
+    }
+
+    &:hover{
+        &::-webkit-scrollbar-thumb{
+            background-color: var(--thumb-bg);
+        }
+    }
 }
 
 .icon{
@@ -54,3 +70,5 @@
     border-bottom: 1px solid var(--border-color);
     padding: 20px 8px 24px;
 }
+
+
