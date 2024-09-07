@@ -19,22 +19,23 @@ import { ChartIcon, CoinIcon, DarkIcon, FeedbackIcon, HubIcon, LogoutIcon, Setti
 import Image from '~/components/Image'
 import config from '~/config'
 import { ThemeContext } from '~/components/Context/ThemeContext'
-import { useContext, useMemo } from 'react'
+import { useContext, useState, useMemo, useEffect } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
 
 const cx = classNames.bind(styles)
-const menuItems = []
 function Header() {
   const themeContext = useContext(ThemeContext)
   const authContext = useContext(AuthContext)
   const userContext = useContext(UserContext)
   const isLogin = userContext.isLogin
-  const {avatar, nickname} = userContext.currentUser
+  const [isDark, setIsDark] = useState(themeContext.theme)
+  const { avatar, nickname } = userContext.currentUser
   const navigate = useNavigate()
   // MENU ITEMS
-  const MENU_ITEMS = useMemo(
-    () => [
+  const MENU_ITEMS = useMemo(() => {
+    console.log('Re-render-item')
+    return [
       {
         icon: <CreatorIcon />,
         title: 'Creator tools',
@@ -75,28 +76,12 @@ function Header() {
       },
       {
         icon: <DarkIcon />,
-        title: 'Dark Mode',
-        children: {
-          title: 'Dark Mode',
-          data: [
-            {
-              type: 'darkmode',
-              title: 'Dark Mode',
-              // icon: themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
-              icon: <svg style={{ width: '24px' }}></svg>,
-            },
-            {
-              type: 'darkmode',
-              title: 'Light Mode',
-              // icon: !themeContext.theme ? <FontAwesomeIcon icon={faCheck} /> : <svg style={{ width: '24px' }}></svg>,
-              icon: <svg style={{ width: '24px' }}></svg>,
-            },
-          ],
-        },
+        title: isDark ? 'Dark Mode' : 'Light Mode',
+        type: 'Dark Mode',
       },
-    ],
-    [],
-  )
+    ]
+  }, [themeContext.theme])
+  
   // USER MENU
   const USER_MENU = useMemo(
     () => [
@@ -147,6 +132,10 @@ function Header() {
     [nickname],
   )
 
+  useEffect(() => {
+    setIsDark((prev) => !prev)
+  }, [themeContext.theme])
+
   // Handle select menu
   const handleMenuChange = (menuItem) => {
     switch (menuItem.type) {
@@ -161,26 +150,16 @@ function Header() {
           userContext.toggleLogin()
         }
         break
-      case 'darkmode':
+      case 'Dark Mode':
         switch (menuItem.title) {
           case 'Light Mode':
-            menuItems[0] = menuItem
             if (themeContext.theme) {
               themeContext.toggleTheme()
-              menuItem.icon = <FontAwesomeIcon icon={faCheck} />
-              if (menuItems[1]) {
-                menuItems[1].icon = <svg style={{ width: '24px' }}></svg>
-              }
             }
             break
           case 'Dark Mode':
-            menuItems[1] = menuItem
             if (!themeContext.theme) {
               themeContext.toggleTheme()
-              menuItem.icon = <FontAwesomeIcon icon={faCheck} />
-              if (menuItems[0]) {
-                menuItems[0].icon = <svg style={{ width: '24px' }}></svg>
-              }
             }
             break
           default:
