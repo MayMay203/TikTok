@@ -1,0 +1,36 @@
+.wrapper{
+    background-color: var(--upload-video-bg);
+    padding: 64px 50px;
+    width: 100%;
+    height: calc(100vh - 92px);
+    flex-shrink: 0;
+    border-radius: 12px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 12px;
+    border: 1.5px dashed var(--border-color);
+    height: 100%;
+    transition: all .2s;
+
+    &:hover{
+        border-color: var(--primary-color);
+        cursor: pointer;
+    }
+}
+
+.title{
+    font-size: 2.4rem;
+}
+
+.desc{
+    color: var(--upload-desc-color);
+}
+
+.upload-btn{
+    min-width: 190px;
+}

@@ -1,0 +1,38 @@
+.mobile-frame{
+    cursor: pointer;
+    height: 587px;
+    margin-top: 20px;
+    position: relative;
+    width: 284px;
+    overflow: hidden;
+}
+
+.mobile-img{
+    width: 100%;
+    height: 100%;
+}
+
+.video{
+    width: 95%;
+    height: 98%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.title{
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.desc{
+    color: var(--duration-color)
+}
+
