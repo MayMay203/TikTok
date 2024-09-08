@@ -10,6 +10,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper'
 import useDebounce from '~/hook/useDebounce'
 import * as searchService from '~/services/searchService'
 import AccountList from '~/components/AccountList'
+import { useNavigate } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 function Search() {
@@ -17,6 +18,8 @@ function Search() {
   const [searchResult, setSearchResult] = useState([])
   const [showResult, setShowResult] = useState(true)
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
 
   const debouncedValue = useDebounce(searchValue.trim(), 500)
 
@@ -51,7 +54,7 @@ function Search() {
   }
 
   return (
- <div>
+    <div>
       <Tippy
         interactive
         visible={showResult && searchResult.length > 0}
@@ -89,12 +92,20 @@ function Search() {
           {loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />}
           <span className={cx('search-line')}></span>
           {/* Search Icon */}
-          <button className={cx('search-btn')}>
+          <button
+            className={cx('search-btn')}
+            onClick={() => {
+              if (debouncedValue) {
+                setShowResult(false)
+                navigate(`/search/users?q=${debouncedValue}`)
+              }
+            }}
+          >
             <SearchIcon className={cx('search-icon')} />
           </button>
         </div>
       </Tippy>
- </div>
+    </div>
   )
 }
 
