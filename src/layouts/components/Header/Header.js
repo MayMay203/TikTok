@@ -21,8 +21,6 @@ import { ThemeContext } from '~/components/Context/ThemeContext'
 import { useContext, useState, useMemo, useEffect } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
-import { toast } from 'react-toastify'
-import routes from '~/config/routes'
 
 const cx = classNames.bind(styles)
 function Header() {
@@ -76,11 +74,11 @@ function Header() {
       },
       {
         icon: <DarkIcon />,
-        title: !isDark ? 'Dark Mode' : 'Light Mode',
+        title: !themeContext.theme ? 'Dark Mode' : 'Light Mode',
         type: 'Dark Mode',
       },
     ]
-  }, [isDark])
+  }, [themeContext.theme])
 
   // USER MENU
   const USER_MENU = useMemo(
