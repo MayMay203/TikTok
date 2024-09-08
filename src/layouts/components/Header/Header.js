@@ -22,6 +22,7 @@ import { useContext, useState, useMemo, useEffect } from 'react'
 import { UserContext } from '~/components/Context/UserContext'
 import { AuthContext } from '~/components/Modal/AuthModalContext'
 import { toast } from 'react-toastify'
+import routes from '~/config/routes'
 
 const cx = classNames.bind(styles)
 function Header() {
@@ -118,7 +119,8 @@ function Header() {
       {
         icon: <SettingIcon />,
         title: 'Settings',
-        to: '/setting',
+        type: 'setting'
+        // to: config.routes.setting,
       },
       ...MENU_ITEMS.slice(1),
       {
@@ -141,6 +143,9 @@ function Header() {
       case 'language':
         // Handle logic
         break
+      case 'setting':
+        console.log('Setting')
+        break;
       case 'logout':
         const isConfirm = window.confirm('Are you sure you want to log out?')
         if (isConfirm) {
