@@ -41,6 +41,7 @@ function AuthProvider({ children }) {
 
   const handleShowSignUp = () => setShowSignUp(true)
   const handleShowLogin = () => setShowLogin(true)
+  
 
   const handleCloseSignUp = () => {
     setShowSignUp(false)

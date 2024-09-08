@@ -150,6 +150,7 @@ function Header() {
           localStorage.removeItem('token')
           localStorage.removeItem('isLogin')
           userContext.toggleLogin()
+          navigate(`${config.routes.home}`)
         }
         break
       case 'Dark Mode':
