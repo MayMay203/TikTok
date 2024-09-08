@@ -7,7 +7,8 @@ const routes = {
     friends: '/friends',
     explore: '/explore',
     detailVideo: '/:nickname/video/:uuid',
-    setting: '/setting'
+    setting: '/setting',
+    finding: '/search/users'
 }
 
 export default routes;

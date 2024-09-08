@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import styles from './Menu.module.scss'
 import classNames from 'classnames/bind'
-import { NavLink } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import Image from '~/components/Image'
 
 const cx = classNames.bind(styles)

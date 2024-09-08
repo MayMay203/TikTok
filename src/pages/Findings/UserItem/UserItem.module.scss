@@ -1,0 +1,52 @@
+.wrapper{
+    display: flex;   
+    align-items: center;
+    column-gap: 24px;
+    padding: 16px;
+
+    &:hover{
+        cursor: pointer;
+        background-color: var(--account-item-hover-bg);
+    }
+}
+
+.avatar-wrapper{
+    width: 70px;
+    height: 70px;
+}
+
+.avatar{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.nickname{
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1.333;
+}
+
+.check-icon{
+    color: rgb(32, 213, 236);
+    font-size: 1.4rem;
+    margin-left: 6px;
+}
+
+.fullname{
+    margin-top: 2px;
+    color: var(--fullname-color);
+    font-size: 1.4rem;
+    line-height: 1.286;
+}
+
+.number{
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 4px 0 2px;
+}
+
+.bio{
+    margin-top: 2px;
+}
