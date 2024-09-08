@@ -10,9 +10,9 @@ function MenuItem({ title, to, icon, activeIcon, avatar, onClick, className }) {
   return (
     <NavLink
       onClick={onClick}
-      to={to}
+      {...(to ? { to } : {})}
       className={(nav) => {
-        return cx('menu-item', { active: nav.isActive})
+        return cx('menu-item', { active: nav.isActive })
       }}
     >
       {hasAvatar || <span className={cx('icon')}>{icon}</span>}

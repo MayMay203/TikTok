@@ -191,6 +191,7 @@ function Sidebar() {
                 onClick: authContext.handleShowLogin,
                 className: 'd-flex',
               })}
+          // to={userContext.isLogin ? `/@${userContext.currentUser.nickname}` : undefined}
         />
       </Menu>
       {isLogin && (

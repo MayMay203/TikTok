@@ -6,7 +6,8 @@ const routes = {
     live: '/live',
     friends: '/friends',
     explore: '/explore',
-    detailVideo: '/:nickname/video/:uuid'
+    detailVideo: '/:nickname/video/:uuid',
+    setting: '/setting'
 }
 
 export default routes;
